@@ -4,7 +4,13 @@ import java.util.UUID;
 import java.util.Date;
 
 public class Purchase {
-    public Purchase(Customer customer, int packageSize, int quantity, double price, Address billingAddress, Address shippingAddress) {
+    public Purchase(Customer customer,
+                    int packageSize,
+                    int quantity,
+                    double price,
+                    Address billingAddress,
+                    Address shippingAddress,
+                    CreditCard creditCard) {
         this.customer = customer;
         this.packageSize = packageSize;
         this.quantity = quantity;
@@ -13,6 +19,7 @@ public class Purchase {
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
         this.shipDate = null;
+        this.creditCard = creditCard;
     }
 
     public UUID getId() {
@@ -84,6 +91,14 @@ public class Purchase {
         this.shipDate = shipDate;
     }
 
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
+
     private UUID id;
     private Customer customer;
     private int  packageSize;
@@ -93,4 +108,8 @@ public class Purchase {
     private Address billingAddress;
     private Address shippingAddress;
     private Date shipDate;
+
+
+
+    private CreditCard creditCard;
 }
