@@ -11,7 +11,7 @@ If you do not have the Temporal server up and running already, run the following
 
 ## (2) Start the Temporal Server
 
-Here is the instructions for starting the Temporal Server on a local Ubuntu machine:
+Here is the command for starting the Temporal Server on a local Ubuntu machine:
 
 `temporal server start-dev --ip 0.0.0.0`
 
