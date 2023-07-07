@@ -8,14 +8,14 @@ public class Customer : ICustomer
     public string Phone { get; set; }
     public Address Address { get; set; }
 
-    public Customer(ICustomer customer)
+    public Customer(string firstName, string lastName, string email, string phone, Address address)
     {
         Id = new Guid();
-        FirstName = customer.FirstName;
-        LastName = customer.LastName;
-        Email = customer.Email;
-        Phone = customer.Phone;
-        Address = customer.Address;
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        Phone = phone;
+        Address = address;
     }
 
 }

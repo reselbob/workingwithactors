@@ -8,7 +8,8 @@ public interface IPurchase
     public double Price { get; set; }
     public int Quantity { get; set; }
     public double Total { get; }
-    public CreditCard CreditCard { get; set; }
-    public Address BillingAddress { get; set; }
-    public Address ShippingAddress { get; set; }
+    public CreditCard? CreditCard { get; set; }
+    public Address? BillingAddress { get; set; }
+    public Address? ShippingAddress { get; set; }
+    public DateTime? PurchaseDate{get; set; }
 }

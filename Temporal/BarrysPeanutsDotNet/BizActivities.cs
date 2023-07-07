@@ -1,25 +1,35 @@
 namespace BarrysPeanuts;
 
 using Temporalio.Activities;
+using System;
+using System.Reflection;
 
 public class BizActivities
 {
     [Activity]
-    public Purchase Checkout(Purchase purchase)
+    public IPurchase Checkout(IPurchase purchase)
     {
+        purchase.PurchaseDate = DateTime.Now;
         return purchase;
     }
 
     [Activity]
-    public Purchase Pay(Purchase purchase)
+    public IPaymentReceipt Pay(IPurchase purchase,
+        CreditCard creditCard,
+        Address billingAddress,
+        Address shippingAddress)
     {
-        return purchase;
+
+        purchase.CreditCard = creditCard;
+        purchase.BillingAddress = billingAddress;
+        purchase.ShippingAddress = shippingAddress;
+        return new PaymentReceipt(purchase as Purchase);
     }
 
     [Activity]
-    public Purchase Ship(Purchase purchase)
+    public ShippingReceipt Ship(Purchase purchase, string shipper)
     {
-        return purchase;
+        return new ShippingReceipt(purchase.Id, shipper);
     }
 
 }

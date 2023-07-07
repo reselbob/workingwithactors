@@ -13,13 +13,13 @@ public class Address: IAddress
 
       public string Country { get; set; }
 
-    public Address(IAddress address)
+    public Address(string address1, string address2, string city, string stateProvince, string zipRegionCode, string country)
     {
-        Address1 = address.Address1;
-        Address2 = address.Address2;
-        City = address.City;
-        StateProvince = address.StateProvince;
-        ZipRegionCode = address.ZipRegionCode;
-        Country = address.Country;
+        Address1 = address1;
+        Address2 = address2;
+        City = city;
+        StateProvince = stateProvince;
+        ZipRegionCode = zipRegionCode;
+        Country = country;
     }
 }
