@@ -23,7 +23,7 @@ public class BizActivities
     {
         
         
-        var result  = new PaymentReceipt(Guid.NewGuid(), purchase.Id, DateTime.Now, creditCard,new Guid());
+        var result  = new PaymentReceipt(Guid.NewGuid(), purchase.Id, DateTime.Now, creditCard,Guid.NewGuid());
         Console.WriteLine("Workflow result for Pay: {0}", result);
         return result;
     }
