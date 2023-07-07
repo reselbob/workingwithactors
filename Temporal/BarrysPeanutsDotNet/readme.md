@@ -23,3 +23,5 @@ Run the following command: `dotnet run worker`
 Go the Web UI in a brower at `http://localhost:8233/`.
 
 You'll output simiar to the following:
+
+![Screenshot 2023-07-07 at 11 59 15 AM](https://github.com/reselbob/workingwithactors/assets/1110569/e2b01c67-6c19-4550-83f4-9a384adc0b69)
