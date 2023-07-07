@@ -5,7 +5,7 @@ public class PurchaseHelper
     static public Purchase GetPurchase()
     {
         var address = new Address("123 Happy Street", "Apt 2", "AnyTown", "IA", "50122", "USA");
-        var customer = new Customer(new Guid(), "Jenny", "Smith", "jenny@smith.com", "3101112222", address);
+        var customer = new Customer(Guid.NewGuid(), "Jenny", "Smith", "jenny@smith.com", "3101112222", address);
         return new Purchase(customer, 3, 10.99m, 2);
     }
 

@@ -23,7 +23,7 @@ public class BizActivities
     {
         
         
-        var result  = new PaymentReceipt(new Guid(), purchase.Id, DateTime.Now, creditCard,new Guid());
+        var result  = new PaymentReceipt(Guid.NewGuid(), purchase.Id, DateTime.Now, creditCard,new Guid());
         Console.WriteLine("Workflow result for Pay: {0}", result);
         return result;
     }
@@ -32,7 +32,7 @@ public class BizActivities
     [Activity]
     public ShippingReceipt Ship(Purchase purchase, string shipper)
     {
-        var result  = new ShippingReceipt(new Guid(), purchase.Id , DateTime.Now,shipper);
+        var result  = new ShippingReceipt(Guid.NewGuid(), purchase.Id , DateTime.Now,shipper);
         Console.WriteLine("Workflow result for Ship: {0}", result);
         return result;
     }
