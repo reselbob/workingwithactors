@@ -3,7 +3,9 @@ using Temporalio.Client;
 using Temporalio.Worker;
 
 // Create a client to localhost on "default" namespace
-var client = await TemporalClient.ConnectAsync(new("localhost:7233"));
+string cnnStr = "localhost:7233";
+Console.WriteLine("Connecting Barry's Peanuts on: {0}", cnnStr);
+var client = await TemporalClient.ConnectAsync(new(cnnStr));
 
 // Cancellation token to shutdown worker on ctrl+c
 using var tokenSource = new CancellationTokenSource();
@@ -20,14 +22,14 @@ var activities = new BizActivities();
 // Create worker with the activity and workflow registered
 using var worker = new TemporalWorker(
     client,
-    new TemporalWorkerOptions("my-task-queue").
+    new TemporalWorkerOptions("barry-task-queue").
         AddActivity(activities.Checkout).
         AddActivity(activities.Pay).
         AddActivity(activities.Ship).
         AddWorkflow<BizWorkflow>());
 
 // Run worker until cancelled
-Console.WriteLine("Running worker");
+Console.WriteLine("Running Barry's Peanuts on: {0}", cnnStr);
 try
 {
     await worker.ExecuteAsync(tokenSource.Token);
