@@ -14,7 +14,7 @@ public class Purchase
     public DateTime? PurchaseDate{get;set;}
 
     public Purchase(Customer customer, int packageSize, decimal price, int quantity){
-        Id = new Guid();
+        Id = Guid.NewGuid();
         Customer = customer;
         PackageSize = packageSize;
         Price = price;

@@ -11,7 +11,7 @@ If you do not have the Temporal server up and running already, run the following
 
 ## (2) Start the Temporal Server
 
-Here is the command for starting the Temporal Server on a local Ubuntu machine:
+Here is the command for starting the Temporal Server on a local Ubuntu machine. Execute the command in a terminal window.
 
 `temporal server start-dev --ip 0.0.0.0`
 
@@ -21,13 +21,13 @@ Here is the command for starting the Temporal Server on a local Ubuntu machine:
 
 Make sure you are in the working directory: `./Temporal/BarrysPeanutsDotNet`
 
-Run the following command: `dotnet run workflow`
+In another terminal window, run the following command: `dotnet run workflow`
 
 ---
 
 ## (4) Start the Worker
 
-Run the following command: `dotnet run worker`\
+In a third terminal window, run the following command: `dotnet run worker`
 
 ---
 
