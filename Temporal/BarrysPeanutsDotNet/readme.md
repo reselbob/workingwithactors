@@ -3,6 +3,8 @@
 
 ## (1) Download the Temporal CLI (which includes the server)
 
+If you do not have the Temporal server up and running already, run the following command: 
+
 `curl -sSf https://temporal.download/cli.sh | sh`
 
 ---
