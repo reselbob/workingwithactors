@@ -1,4 +1,4 @@
-# Getting Barry's Gourment Peanuts Up and Running
+# Getting Barry's Gourment Peanuts DotNet Version Up and Running
 ---
 
 ## (1) Download the Temporal CLI (which includes the server)
