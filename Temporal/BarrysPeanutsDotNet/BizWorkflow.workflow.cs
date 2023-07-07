@@ -8,6 +8,8 @@ public class BizWorkflow
     [WorkflowRun]
     public async Task RunAsync(int maxAttempts = 5)
     {
+        Console.WriteLine("Running Barry's Peanuts Workflow");
+        
         Purchase purchase = PurchaseHelper.GetPurchase();
         
         purchase =  await Workflow.ExecuteActivityAsync(
