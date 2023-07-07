@@ -6,12 +6,24 @@ using Temporalio.Workflows;
 public class BizWorkflow
 {
     [WorkflowRun]
-    public async Task<string> RunAsync(string name)
+    public async Task RunAsync(int maxAttempts = 5)
     {
-        IPurchase purchase = PurchaseHelper.GetPurchase();
+        Purchase purchase = PurchaseHelper.GetPurchase();
         
-        return await Workflow.ExecuteActivityAsync(
+        purchase =  await Workflow.ExecuteActivityAsync(
             (BizActivities act) => act.Checkout(purchase),
             new() { ScheduleToCloseTimeout = TimeSpan.FromMinutes(5) });
+        
+        CreditCard creditCard = PurchaseHelper.GetCreditCard(purchase);
+
+        var paymentReceipt =  await Workflow.ExecuteActivityAsync(
+            (BizActivities act) => act.Pay(purchase,creditCard,purchase.Customer.address,purchase.Customer.address),
+            new() { ScheduleToCloseTimeout = TimeSpan.FromMinutes(5) });
+        
+        string shipper = PurchaseHelper.GetShipper();
+
+         var shippingReceipt =  await Workflow.ExecuteActivityAsync(
+            (BizActivities act) => act.Ship(purchase, shipper),
+            new() { ScheduleToCloseTimeout = TimeSpan.FromMinutes(5) });  
     }
 }

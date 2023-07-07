@@ -6,30 +6,28 @@ using System.Reflection;
 
 public class BizActivities
 {
+
     [Activity]
-    public IPurchase Checkout(IPurchase purchase)
+    public Purchase Checkout(Purchase purchase)
     {
         purchase.PurchaseDate = DateTime.Now;
         return purchase;
     }
 
-    [Activity]
-    public IPaymentReceipt Pay(IPurchase purchase,
+  [Activity]
+    public PaymentReceipt Pay(Purchase purchase,
         CreditCard creditCard,
         Address billingAddress,
         Address shippingAddress)
     {
-
-        purchase.CreditCard = creditCard;
-        purchase.BillingAddress = billingAddress;
-        purchase.ShippingAddress = shippingAddress;
-        return new PaymentReceipt(purchase as Purchase);
+        return new PaymentReceipt(new Guid(), purchase.Id, DateTime.Now, creditCard,new Guid());
     }
+
 
     [Activity]
     public ShippingReceipt Ship(Purchase purchase, string shipper)
     {
-        return new ShippingReceipt(purchase.Id, shipper);
+        return new ShippingReceipt(new Guid(), purchase.Id , DateTime.Now,shipper);
     }
 
 }
