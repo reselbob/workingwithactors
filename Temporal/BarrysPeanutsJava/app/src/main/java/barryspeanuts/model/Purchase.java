@@ -10,12 +10,14 @@ public class Purchase
     public int packageSize;
     public double price;
     public int quantity;
-    public double Total;
+    public double total;
     public Optional<CreditCard>creditCard;
     public Optional<Address> billingAddress;
     public Optional<Address> shippingAddress;
     public LocalDateTime purchaseDate;
 
+    public Purchase(){}
+    
     public Purchase(Customer customer, int packageSize, double price, int quantity){
         this.id = UUID.randomUUID();
         this.customer = customer;
@@ -25,6 +27,9 @@ public class Purchase
     }
 
     public UUID getId() {
+        if(this.id == null){
+            this.id = UUID.randomUUID();
+        }
         return this.id;
     }
 
@@ -62,7 +67,8 @@ public class Purchase
     }
 
     public double getTotal() {
-        return this.price * this.quantity;
+        this.total = this.price * this.quantity;
+        return this.total;
     }
 
     public Optional<CreditCard> getCreditCard() {

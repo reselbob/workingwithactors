@@ -5,6 +5,8 @@ import java.util.UUID;
 
 public class PaymentReceipt {
 
+    public PaymentReceipt() {}
+
     public PaymentReceipt(UUID purchaseId, LocalDateTime paymentDate, CreditCard creditCard, UUID transactionId) {
         this.id = UUID.randomUUID();
         this.purchaseId = purchaseId;
@@ -14,7 +16,10 @@ public class PaymentReceipt {
     }
 
     public UUID getId() {
-        return this.purchaseId;
+        if(this.id == null){
+            this.id = UUID.randomUUID();
+        }
+        return this.id;
     }
 
     public UUID getPurchaseId() {

@@ -5,12 +5,20 @@ import java.util.UUID;
 
 public class ShippingReceipt {
 
-    
+    public ShippingReceipt(){}
+
     public ShippingReceipt(UUID purchaseId, String shipper) {
         this.id = UUID.randomUUID();
         this.shipDate = LocalDateTime.now();
         this.purchaseId = purchaseId;
         this.shipper = shipper;
+    }
+
+     public UUID getId() {
+        if(this.id == null){
+            this.id = UUID.randomUUID();
+        }
+        return this.id;
     }
     public UUID getPurchaseId() {
         return purchaseId;
@@ -30,6 +38,7 @@ public class ShippingReceipt {
     public void setShipper(String shipper) {
         this.shipper = shipper;
     }
+
     UUID id;
     UUID purchaseId;
     LocalDateTime shipDate;

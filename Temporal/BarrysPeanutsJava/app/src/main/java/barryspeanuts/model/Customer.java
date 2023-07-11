@@ -3,6 +3,9 @@ import java.util.UUID;
 
 public class Customer {
     public UUID getId() {
+        if(this.id == null){
+            this.id = UUID.randomUUID();
+        }
         return this.id;
     }
 
@@ -46,6 +49,8 @@ public class Customer {
         this.address = address;
     }
 
+    public Customer() {}
+    
     public Customer(String firstName, String lastName, String email, String phone, Address address) {
         this.id = UUID.randomUUID();
         this.firstName = firstName;
