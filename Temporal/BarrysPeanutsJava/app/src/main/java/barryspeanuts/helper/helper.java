@@ -3,6 +3,7 @@ package barryspeanuts.helper;
 import barryspeanuts.model.Address;
 import barryspeanuts.model.Customer;
 import barryspeanuts.model.Purchase;
+import barryspeanuts.model.CreditCard;
 
 public class helper {
     public static Address getAddress(){
@@ -15,5 +16,11 @@ public class helper {
 
     public static Purchase getPurchase(){
         return new Purchase(getCustomer(), 3, 12.99 ,5);
+    }
+
+        public static CreditCard getCreditCard(){
+        Customer customer = getCustomer();
+        String fullname = String.format("%s %s", customer.getAddress(), customer.getLastName());
+        return new CreditCard(fullname, "11112222333334444", 8, 2026, 999);
     }
 }
