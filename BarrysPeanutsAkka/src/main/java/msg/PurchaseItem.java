@@ -3,14 +3,17 @@ package msg;
 import java.util.UUID;
 import java.util.Date;
 
-public class Purchase {
-    public Purchase(Customer customer,
-                    int packageSize,
-                    int quantity,
-                    double price,
-                    Address billingAddress,
-                    Address shippingAddress,
-                    CreditCard creditCard) {
+public class PurchaseItem {
+
+    public PurchaseItem(Customer customer,
+                        String description,
+                        int packageSize,
+                        int quantity,
+                        double price,
+                        Address billingAddress,
+                        Address shippingAddress,
+                        CreditCard creditCard) {
+        this.description = description;
         this.customer = customer;
         this.packageSize = packageSize;
         this.quantity = quantity;
@@ -99,8 +102,18 @@ public class Purchase {
         this.creditCard = creditCard;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
     private UUID id;
     private Customer customer;
+    private String description;
     private int  packageSize;
     private int quantity;
     private double price;
@@ -108,8 +121,5 @@ public class Purchase {
     private Address billingAddress;
     private Address shippingAddress;
     private Date shipDate;
-
-
-
     private CreditCard creditCard;
 }

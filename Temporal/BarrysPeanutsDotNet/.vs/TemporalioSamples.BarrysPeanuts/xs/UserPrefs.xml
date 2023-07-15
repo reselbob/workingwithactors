@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{A74997F1-5162-4C64-A0BA-FB7D403CA05E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Activities/CheckoutActivities.cs">
+    <Files>
+      <File FileName="MyActivities.cs" Line="1" Column="54" />
+      <File FileName="Models/Purchase.cs" Line="1" Column="1" />
+      <File FileName="Models/Address.cs" Line="1" Column="1" />
+      <File FileName="Models/Customer.cs" Line="1" Column="1" />
+      <File FileName="Models/CreditCard.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TemporalioSamples.BarrysPeanuts" expanded="True">
+            <Node name="TemporalioSamples.BarryPeanuts" expanded="True" selected="True">
+              <Node name="Activities" expanded="True" />
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TemporalioSamples.BarryPeanuts PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

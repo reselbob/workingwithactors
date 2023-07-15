@@ -6,18 +6,18 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import msg.Purchase;
+import msg.PurchaseItem;
 
 
-public class ShipActor extends AbstractBehavior<Purchase>{
-    public ShipActor(ActorContext<Purchase> context) {
+public class ShippingActor extends AbstractBehavior<PurchaseItem>{
+    public ShippingActor(ActorContext<PurchaseItem> context) {
         super(context);
     }
 
     @Override
-    public Receive<Purchase> createReceive() {
+    public Receive<PurchaseItem> createReceive() {
         return newReceiveBuilder().
-                onMessage(Purchase.class, this::makePurchase)
+                onMessage(PurchaseItem.class, this::makePurchase)
                 .build();
     }
 
@@ -25,14 +25,14 @@ public class ShipActor extends AbstractBehavior<Purchase>{
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(date);
     }
-    private Behavior<Purchase> makePurchase(Purchase msg){
+    private Behavior<PurchaseItem> makePurchase(PurchaseItem msg){
         Date today = new Date();
         msg.setShipDate(today);
         System.out.println("Shipping purchase with ID: " + msg.getId() + " on: " + this.getNowString(today));
         return this;
     }
 
-    public static Behavior<Purchase> behavior(){
-        return Behaviors.setup(ShipActor::new);
+    public static Behavior<PurchaseItem> behavior(){
+        return Behaviors.setup(ShippingActor::new);
     }
 }
