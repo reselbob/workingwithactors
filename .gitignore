@@ -1,3 +1,34 @@
+*.
+
+# Build output
+**/bin
+**/obj
+
+# Temporary files
+*.ilk
+*.pdb
+*.ipdb
+
+# IntelliSense files
+*.suo
+*.user
+*.userosscache
+
+# Generated files
+**/Generated\ Files
+*.nupkg
+*.nuget
+*.targets
+*.props
+
+# Test results
+**/TestResults
+*.trx
+
+# Other files
+*.dbmdl
+*.pfx
+*.publishsettings
 # Compiled class file
 *.class
 
