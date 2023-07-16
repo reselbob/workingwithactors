@@ -6,27 +6,49 @@ import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 import msg.PurchaseItem;
 
-public class CheckOutActor extends AbstractBehavior<PurchaseItem>{
-    public CheckOutActor(ActorContext<PurchaseItem> context) {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+
+public class CheckOutActor extends AbstractBehavior<CheckOutActor.CheckOutItems>{
+    public CheckOutActor(ActorContext<CheckOutActor.CheckOutItems> context) {
         super(context);
     }
 
     @Override
-    public Receive<PurchaseItem> createReceive() {
+    public Receive<CheckOutItems> createReceive() {
         return newReceiveBuilder().
-                onMessage(PurchaseItem.class, this::makePurchase)
+                onMessage(CheckOutItems.class, this::makePurchase)
                 .build();
     }
 
-    private Behavior<PurchaseItem> makePurchase(PurchaseItem msg){
-        String response = "Checking out a purchase with ID: "
-                + msg.getId() + "for a total of: "
-                + msg.getTotal();
-        System.out.println(response);
+    private Behavior<CheckOutItems> makePurchase(CheckOutItems msg){
+        Vector<PurchaseItem> items = msg.getItems();
+        for (PurchaseItem item : items) {
+            Date today = new Date();
+            System.out.printf("Checking out Purchase Item: %s at %s \n", item.getId(),this.getNowString(today));
+        }
         return this;
     }
 
-    public static Behavior<PurchaseItem> behavior(){
+    private String getNowString(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(date);
+    }
+    public static Behavior<CheckOutItems> behavior(){
         return Behaviors.setup(CheckOutActor::new);
     }
+    public static class CheckOutItems {
+        public CheckOutItems(Vector<PurchaseItem> items) {
+            this.items = items;
+
+        }
+
+        public Vector<PurchaseItem> getItems() {
+            return items;
+        }
+
+        public Vector<PurchaseItem> items;
+    }
 }
+

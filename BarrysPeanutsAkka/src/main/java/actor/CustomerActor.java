@@ -1,7 +1,6 @@
 package actor;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.Behavior;
@@ -40,6 +39,6 @@ public class CustomerActor extends AbstractBehavior<PurchaseItem>{
     }
 
     public static Behavior<PurchaseItem> behavior(){
-        return Behaviors.setup(ShippingActor::new);
+        return Behaviors.setup(CustomerActor::new);
     }
 }
