@@ -4,18 +4,15 @@ import actor.PaymentActor;
 import actor.ShoppingCartActor;
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.ActorRef;
-import msg.Address;
-import msg.CreditCard;
-import msg.Customer;
-import msg.PurchaseItem;
+import msg.*;
 
 public class App {
     public static void main(String[] args) {
         System.out.println("Starting Barry's Gourmet Peanuts");
         //ActorRef<CheckOutActor.CheckOutItems> checkoutActor = ActorSystem.create(CheckOutActor.behavior(), "checkoutActor");
-        //ActorRef<PurchaseItem> paymentActor = ActorSystem.create(PaymentActor.behavior(), "payActor");
+
         //ActorRef<PurchaseItem> shippingActor = ActorSystem.create(ShippingActor.behavior(), "shipActor");
-        ActorRef<PurchaseItem> customerActor = ActorSystem.create(CustomerActor.behavior(), "customerActor");
+
 
 
 

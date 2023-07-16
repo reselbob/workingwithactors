@@ -8,37 +8,36 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
+import msg.PaymentReceipt;
 import msg.PurchaseItem;
-import actor.ShoppingCartActor;
 
 
-public class CustomerActor extends AbstractBehavior<PurchaseItem>{
+public class CustomerActor extends AbstractBehavior<PaymentReceipt>{
 
-    public CustomerActor(ActorContext<PurchaseItem> context) {
+    public CustomerActor(ActorContext<PaymentReceipt> context) {
         super(context);
     }
 
     @Override
-    public Receive<PurchaseItem> createReceive() {
+    public Receive<PaymentReceipt> createReceive() {
         return newReceiveBuilder().
-                onMessage(PurchaseItem.class, this::sendToShoppingCart)
+                onMessage(PaymentReceipt.class, this::processReceipt)
                 .build();
     }
+
 
     private String getNowString(Date date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(date);
     }
-    private Behavior<PurchaseItem> sendToShoppingCart(PurchaseItem msg){
+    private Behavior<PaymentReceipt> processReceipt(PaymentReceipt msg){
         Date today = new Date();
-        System.out.println("CustomerActor sending purchase with ID: " + msg.getId() + " to ShoppingCart: " + this.getNowString(today));
-        ActorRef<ShoppingCartActor.Command> shoppingCartActor = ActorSystem.create(ShoppingCartActor.behavior(), "shoppingCartActor");
-        ShoppingCartActor.Command command  = new ShoppingCartActor.Command(msg,ShoppingCartActor.Command.Action.ADD);
-        shoppingCartActor.tell(command);
+        String str = String.format("CustomerActor processing Payment Receipt with ID: %s with CC Number: %s", msg.getId(), msg.getCreditCardNumber());
+        System.out.println(str);
         return this;
     }
 
-    public static Behavior<PurchaseItem> behavior(){
+    public static Behavior<PaymentReceipt> behavior(){
         return Behaviors.setup(CustomerActor::new);
     }
 }

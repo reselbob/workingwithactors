@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Vector;
 
 import msg.PurchaseItem;
+import msg.CheckOutItems;
 
 
 public class ShoppingCartActor extends AbstractBehavior<ShoppingCartActor.Command> {
@@ -42,13 +43,12 @@ public class ShoppingCartActor extends AbstractBehavior<ShoppingCartActor.Comman
         if(Command.Action.ADD == command.getAction() ){
             this.items.add(command.getPurchaseItem());
         } else if (Command.Action.CHECKOUT == command.getAction() ) {
-            ActorRef<CheckOutActor.CheckOutItems> checkoutActor = ActorSystem.create(CheckOutActor.behavior(), "checkoutActor");
-            CheckOutActor.CheckOutItems checkOutItems  = new CheckOutActor.CheckOutItems(this.getItems());
+            ActorRef<CheckOutItems> checkoutActor = ActorSystem.create(CheckOutActor.behavior(), "checkoutActor");
+            CheckOutItems checkOutItems  = new CheckOutItems(this.getItems());
             checkoutActor.tell(checkOutItems);
         }else if(Command.Action.REMOVE == command.getAction() ) {
             this.items.remove(command.getPurchaseItem());
         }
-
         return this;
     }
 

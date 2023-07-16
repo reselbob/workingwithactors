@@ -1,4 +1,4 @@
-package receipt;
+package msg;
 
 public class ShippingReceipt {
 }
