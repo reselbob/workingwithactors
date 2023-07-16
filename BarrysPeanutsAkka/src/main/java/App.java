@@ -9,13 +9,6 @@ import msg.*;
 public class App {
     public static void main(String[] args) {
         System.out.println("Starting Barry's Gourmet Peanuts");
-        //ActorRef<CheckOutActor.CheckOutItems> checkoutActor = ActorSystem.create(CheckOutActor.behavior(), "checkoutActor");
-
-        //ActorRef<PurchaseItem> shippingActor = ActorSystem.create(ShippingActor.behavior(), "shipActor");
-
-
-
-
         Address address = new Address("123 Main Street",
                 "Apt 1",
                 "Anytown",
