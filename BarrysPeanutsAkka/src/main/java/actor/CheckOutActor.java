@@ -39,7 +39,6 @@ public class CheckOutActor extends AbstractBehavior<CheckOutItems> {
                 new Date(),
                 item.getCreditCard().getCreditCardNumber(),
                 purchaseTotal);
-
         return this;
     }
 

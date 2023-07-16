@@ -32,7 +32,10 @@ public class CustomerActor extends AbstractBehavior<PaymentReceipt>{
     }
     private Behavior<PaymentReceipt> processReceipt(PaymentReceipt msg){
         Date today = new Date();
-        String str = String.format("CustomerActor processing Payment Receipt with ID: %s with CC Number: %s", msg.getId(), msg.getCreditCardNumber());
+        String str = String.format("CustomerActor processing Payment Receipt with ID: %s with CC Number: %s for the amount of: %s",
+                msg.getId(),
+                msg.getCreditCardNumber(),
+                msg.getAmount());
         System.out.println(str);
         return this;
     }
