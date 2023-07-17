@@ -1,6 +1,3 @@
-import actor.CheckOutActor;
-import actor.CustomerActor;
-import actor.PaymentActor;
 import actor.ShoppingCartActor;
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.ActorRef;
@@ -9,6 +6,7 @@ import msg.*;
 public class App {
     public static void main(String[] args) {
         System.out.println("Starting Barry's Gourmet Peanuts");
+        /*
         Address address = new Address("123 Main Street",
                 "Apt 1",
                 "Anytown",
@@ -23,8 +21,12 @@ public class App {
 
         CreditCard creditCard = new CreditCard(customer.getFirstName() + " " + customer.getLastName(),
               "1111222233334444",8, 26,111 );
+*/
+        Customer customer = helper.MockHelper.getCustomer();
+        Address address = helper.MockHelper.getAddress();
+        CreditCard creditCard = helper.MockHelper.getCreditCard(customer.getFirstName(), customer.getLastName());
 
-        PurchaseItem purchase = new PurchaseItem(customer, "Barry's Gourmet Peanuts",5, 1,10.99, address, address, creditCard);
+        PurchaseItem purchase = new PurchaseItem(customer, "Barry's Gourmet Peanuts",5, 1,10.99, address, address);
         // customerActor.tell(purchase);
         ActorRef<ShoppingCartActor.Command> shoppingCartActor = ActorSystem.create(ShoppingCartActor.behavior(), "shoppingCartActor");
         ShoppingCartActor.Command command  = new ShoppingCartActor.Command(purchase,ShoppingCartActor.Command.Action.ADD);

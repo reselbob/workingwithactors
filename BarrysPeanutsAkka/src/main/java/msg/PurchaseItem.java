@@ -11,25 +11,20 @@ public class PurchaseItem {
                         int quantity,
                         double price,
                         Address billingAddress,
-                        Address shippingAddress,
-                        CreditCard creditCard) {
+                        Address shippingAddress) {
+
+        this.id = UUID.randomUUID();
         this.description = description;
         this.customer = customer;
         this.packageSize = packageSize;
         this.quantity = quantity;
         this.price = price;
-        this.total = total;
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
         this.shipDate = null;
-        this.creditCard = creditCard;
     }
 
     public UUID getId() {
-        if (this.id == null) {
-            // Create a new UUID
-            this.id = UUID.randomUUID();
-        }
         return this.id;
     }
 
@@ -38,32 +33,19 @@ public class PurchaseItem {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public int getPackageSize() {
         return packageSize;
     }
 
-    public void setPackageSize(int packageSize) {
-        this.packageSize = packageSize;
-    }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public double getTotal() {
@@ -94,32 +76,20 @@ public class PurchaseItem {
         this.shipDate = shipDate;
     }
 
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
-    }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
-
-    private UUID id;
-    private Customer customer;
-    private String description;
-    private int  packageSize;
-    private int quantity;
-    private double price;
-    private double total;
+    private final UUID id;
+    private final Customer customer;
+    private final String description;
+    private final int packageSize;
+    private final int quantity;
+    private final double price;
     private Address billingAddress;
     private Address shippingAddress;
     private Date shipDate;
-    private CreditCard creditCard;
 }
+

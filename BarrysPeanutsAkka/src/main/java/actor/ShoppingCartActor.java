@@ -43,9 +43,9 @@ public class ShoppingCartActor extends AbstractBehavior<ShoppingCartActor.Comman
         if(Command.Action.ADD == command.getAction() ){
             this.items.add(command.getPurchaseItem());
         } else if (Command.Action.CHECKOUT == command.getAction() ) {
-            ActorRef<CheckOutItems> checkoutActor = ActorSystem.create(CheckOutActor.behavior(), "checkoutActor");
-            CheckOutItems checkOutItems  = new CheckOutItems(this.getItems());
-            checkoutActor.tell(checkOutItems);
+            ActorRef<Object> checkoutActor = ActorSystem.create(CheckOutActor.create(), "checkoutActor");
+            CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.getItems());
+            checkoutActor.tell(startCheckout);
         }else if(Command.Action.REMOVE == command.getAction() ) {
             this.items.remove(command.getPurchaseItem());
         }
