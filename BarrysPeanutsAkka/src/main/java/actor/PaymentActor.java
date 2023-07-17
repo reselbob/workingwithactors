@@ -50,7 +50,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
         );
         System.out.println(str);
        // send a receipt to the Customer
-        PaymentActor.PaymentReceipt paymentReceipt = new PaymentActor.PaymentReceipt(msg.customer,new Date(), msg.creditCard.getCreditCardNumber(),msg.getPaymentAmount());
+        PaymentActor.PaymentReceipt paymentReceipt = new PaymentActor.PaymentReceipt(msg.customer,new Date(), msg.creditCard.getCreditCardNumber(),amount);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");
         customerActor.tell(paymentReceipt);
 
