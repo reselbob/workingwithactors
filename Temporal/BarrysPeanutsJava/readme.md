@@ -22,7 +22,7 @@ Here is the command for starting the Temporal Server on a local Ubuntu machine. 
 
 ## (3) Navigate to the application working directory
 
-In a sepaarate terminal window run:
+In a separate terminal window run:
 
 
 ```
