@@ -1,12 +1,15 @@
 package barryspeanuts;
 
 import barryspeanuts.helper.helper;
+import barryspeanuts.model.PurchaseItem;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowException;
 import io.temporal.client.WorkflowOptions;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.worker.Worker;
 import io.temporal.worker.WorkerFactory;
+
+import java.util.Vector;
 
 public class BarrysPeanutsExecutor {
 
@@ -42,8 +45,13 @@ public class BarrysPeanutsExecutor {
         WorkflowOptions options = WorkflowOptions.newBuilder().setTaskQueue(TASK_QUEUE).build();
         ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class, options);
         try {
-
             wf.startWorkflow();
+
+            PurchaseItem purchaseItem = helper.getPurchase();
+            wf.addItem(purchaseItem);
+            Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
+            String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
+            System.out.println(str);
         } catch (WorkflowException e) {
             // Expected
         }
