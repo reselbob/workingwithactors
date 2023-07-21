@@ -15,6 +15,11 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     private WorkflowQueue<WorkflowTask> queue = Workflow.newWorkflowQueue(1024);
 
     @Override
+    public void holderMethod() {
+
+    }
+
+    @Override
     public void startWorkflow() {
         // Start a loop that keeps running until the workflow is canceled.
         System.out.println("Starting Workflow for Barry's Peanuts");

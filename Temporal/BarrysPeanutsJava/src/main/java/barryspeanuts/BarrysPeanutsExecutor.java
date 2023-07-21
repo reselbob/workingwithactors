@@ -2,18 +2,19 @@ package barryspeanuts;
 
 import barryspeanuts.helper.helper;
 import barryspeanuts.model.PurchaseItem;
-import io.temporal.client.WorkflowClient;
-import io.temporal.client.WorkflowException;
-import io.temporal.client.WorkflowOptions;
+import io.temporal.client.*;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.worker.Worker;
 import io.temporal.worker.WorkerFactory;
 
+import java.util.UUID;
 import java.util.Vector;
 
 public class BarrysPeanutsExecutor {
 
     static final String TASK_QUEUE = "BarryPeanutsJava";
+    static final String WORKFLOW_ID = TASK_QUEUE + "-" + UUID.randomUUID();
+
 
     @SuppressWarnings("CatchAndPrintStackTrace")
     public static void main(String[] args) {
@@ -42,13 +43,18 @@ public class BarrysPeanutsExecutor {
         System.out.println("Worker started for task queue: " + TASK_QUEUE);
 
         // now we can start running instances of our workflow - its state will be persisted
-        WorkflowOptions options = WorkflowOptions.newBuilder().setTaskQueue(TASK_QUEUE).build();
-        ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class, options);
+        WorkflowOptions options = WorkflowOptions.newBuilder().setTaskQueue(TASK_QUEUE).setWorkflowId(WORKFLOW_ID).build();
+        ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class,options);
+        //WorkflowStub wf = client.newUntypedWorkflowStub("DynamicWF", options);
         try {
-            wf.startWorkflow();
-
+            //WorkflowClient.start(wf::startWorkflow);
+            //wf.signalWithStart("startWorkflow",null, null);
+            BatchRequest signalWithStartReq = client.newSignalWithStartRequest();
+            signalWithStartReq.add(wf::startWorkflow);
+            client.signalWithStart(signalWithStartReq);
             PurchaseItem purchaseItem = helper.getPurchase();
             wf.addItem(purchaseItem);
+            //Vector<PurchaseItem> purchaseItems = wf.query("queryPurchaseItems",Vector<PurchaseItem>.class );
             Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
             String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
             System.out.println(str);

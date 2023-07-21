@@ -13,6 +13,7 @@ public class AddItemTaskImpl implements WorkflowTask {
 
     @Override
     public void process(ShoppingCartWorkflow shoppingCartWorkflow) {
+        System.out.println("adding an purchaseItem");
         shoppingCartWorkflow.addItem(this.purchaseItem);
     }
 }
