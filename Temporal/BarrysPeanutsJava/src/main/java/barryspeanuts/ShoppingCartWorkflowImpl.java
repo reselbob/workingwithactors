@@ -1,6 +1,6 @@
 package barryspeanuts;
 
-import barryspeanuts.task.WorkflowTask;
+import barryspeanuts.task.*;
 import io.temporal.workflow.Functions;
 import io.temporal.workflow.QueueConsumer;
 import io.temporal.workflow.WorkflowQueue;
@@ -21,7 +21,6 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
 
     @Override
     public void startWorkflow() {
-        // Start a loop that keeps running until the workflow is canceled.
         System.out.println("Starting Workflow for Barry's Peanuts");
         while (true) {
             if (Workflow.getInfo().getHistoryLength() > 2000) {
@@ -66,16 +65,17 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
 
     @Override
     public void CheckOut() {
-
+        this.queue.put(new CheckOutTaskImpl());
     }
 
     @Override
     public void Pay() {
-
+        this.queue.put(new PayTaskImpl());
     }
 
     @Override
     public void Ship() {
+        this.queue.put(new ShipTaskImpl());
 
     }
 
@@ -86,7 +86,7 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
 
     @Override
     public void exit() {
-
+        this.queue.put(new EmptyCartTaskImpl());
     }
 
     Vector<PurchaseItem> purchaseItems;

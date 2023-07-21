@@ -54,6 +54,8 @@ public class BarrysPeanutsExecutor {
             client.signalWithStart(signalWithStartReq);
             PurchaseItem purchaseItem = helper.getPurchase();
             wf.addItem(purchaseItem);
+            wf.addItem(purchaseItem);
+            wf.addItem(purchaseItem);
             //Vector<PurchaseItem> purchaseItems = wf.query("queryPurchaseItems",Vector<PurchaseItem>.class );
             Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
             String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
