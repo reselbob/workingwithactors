@@ -67,7 +67,7 @@ public class CheckOutActor extends AbstractBehavior<Object> {
             amount = amount + item.getTotal();
         }
         Customer customer = msg.getPurchaseItems().firstElement().getCustomer();
-        PaymentActor.Payment  payment = new PaymentActor.Payment(customer,creditCard,msg.getPurchaseItems());
+        PaymentActor.PaymentInfo  payment = new PaymentActor.PaymentInfo(customer,creditCard,msg.getPurchaseItems());
         ActorSystem<Object> paymentActor = ActorSystem.create(PaymentActor.create(), "paymentActor");
         paymentActor.tell(payment);
         return this;
@@ -80,7 +80,7 @@ public class CheckOutActor extends AbstractBehavior<Object> {
         );
         System.out.println(str);
         // Now ship the item
-        ShipperActor.Shipment shipment = new ShipperActor.Shipment("FedEX", msg.getPurchaseItems());
+        ShipperActor.ShipmentInfo shipment = new ShipperActor.ShipmentInfo("FedEX", msg.getPurchaseItems());
         ActorSystem<Object> shipperActor = ActorSystem.create(ShipperActor.create(), "shipperActor");
         shipperActor.tell(shipment);
         return this;

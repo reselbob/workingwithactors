@@ -2,7 +2,7 @@ package barryspeanuts.helper;
 
 import barryspeanuts.model.Address;
 import barryspeanuts.model.Customer;
-import barryspeanuts.model.Purchase;
+import barryspeanuts.model.PurchaseItem;
 import barryspeanuts.model.CreditCard;
 
 public class helper {
@@ -14,13 +14,12 @@ public class helper {
         return new Customer("Josiah", "Bartlet", "prez@whitehouse.gove", "202 456 1414", getAddress());
     }
 
-    public static Purchase getPurchase(){
-        return new Purchase(getCustomer(), 3, 12.99 ,5);
+    public static PurchaseItem getPurchase(){
+        return new PurchaseItem(getCustomer(), "Deluxe Peanuts:", 3, 12.99 ,5);
     }
 
-        public static CreditCard getCreditCard(){
-        Customer customer = getCustomer();
-        String fullname = String.format("%s %s", customer.getAddress(), customer.getLastName());
-        return new CreditCard(fullname, "11112222333334444", 8, 2026, 999);
+        public static CreditCard getCreditCard(String firstName, String lastName){
+        String fullName = String.format("%s %s", firstName, lastName);
+        return new CreditCard(fullName, "11112222333334444", 8, 2026, 999);
     }
 }

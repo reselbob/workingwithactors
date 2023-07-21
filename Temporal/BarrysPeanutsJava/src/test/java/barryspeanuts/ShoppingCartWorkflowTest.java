@@ -1,7 +1,7 @@
 package barryspeanuts;
 
 import barryspeanuts.helper.helper;
-import barryspeanuts.model.Purchase;
+import barryspeanuts.model.PurchaseItem;
 
 import io.temporal.client.WorkflowOptions;
 import io.temporal.testing.TestWorkflowRule;
@@ -9,36 +9,34 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
-public class BarrysPeanutsWorkflowTest {
+public class ShoppingCartWorkflowTest {
 
     @Rule
     public TestWorkflowRule testWorkflowRule =
             TestWorkflowRule.newBuilder()
-                    .setWorkflowTypes(BarrysPeanutsWorkflowImpl.class)
+                    .setWorkflowTypes(ShoppingCartWorkflowImpl.class)
                     .setDoNotStart(true)
                     .build();
 
     @Test
     public void testIntegrationGetGreeting() {
-        testWorkflowRule.getWorker().registerActivitiesImplementations(new BarrysPeanutsActivitiesImpl());
+        testWorkflowRule.getWorker().registerActivitiesImplementations(new ShoppingActivitiesImpl());
         testWorkflowRule.getTestEnvironment().start();
 
-        BarrysPeanutsWorkflow workflow =
+        ShoppingCartWorkflow workflow =
                 testWorkflowRule
                         .getWorkflowClient()
                         .newWorkflowStub(
-                                BarrysPeanutsWorkflow.class,
+                                ShoppingCartWorkflow.class,
                                 WorkflowOptions.newBuilder().setTaskQueue(testWorkflowRule.getTaskQueue()).build());
-                                Purchase purchase = helper.getPurchase();
-                                workflow.getBizProcess(purchase);
+                                workflow.startWorkflow();
         testWorkflowRule.getTestEnvironment().shutdown();
     }
 
     @Test
     public void testMockedGetGreeting() {
-        Purchase purchase = helper.getPurchase();
+        PurchaseItem purchase = helper.getPurchase();
         /* 
         BarrysPeanutsActivities formatActivities = mock(BarrysPeanutsActivities.class, withSettings().withoutAnnotations());
         when(formatActivities.checkOut(purchase).thenReturn(purchase);

@@ -29,12 +29,12 @@ public class ShipperActor extends AbstractBehavior<Object> {
     @Override
     public Receive<Object> createReceive() {
         return newReceiveBuilder()
-                .onMessage(Shipment.class, this::handleShipment)
+                .onMessage(ShipmentInfo.class, this::handleShipment)
                 .build();
     }
 
 
-    private Behavior<Object> handleShipment(Shipment msg) {
+    private Behavior<Object> handleShipment(ShipmentInfo msg) {
         // Now ship
 
         Date shipDate = new Date();
@@ -57,9 +57,9 @@ public class ShipperActor extends AbstractBehavior<Object> {
         return this;
     }
 
-    public static class Shipment {
+    public static class ShipmentInfo {
 
-        public Shipment(String shipper, Vector<PurchaseItem> purchaseItems) {
+        public ShipmentInfo(String shipper, Vector<PurchaseItem> purchaseItems) {
             this.id = UUID.randomUUID();
             this.shipper = shipper;
             this.purchaseItems = purchaseItems;

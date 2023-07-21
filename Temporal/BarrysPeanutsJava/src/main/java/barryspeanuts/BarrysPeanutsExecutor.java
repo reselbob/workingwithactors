@@ -28,11 +28,11 @@ public class BarrysPeanutsExecutor {
         Worker worker = factory.newWorker(TASK_QUEUE);
 
         // Workflows are stateful. So you need a type to create instances.
-        worker.registerWorkflowImplementationTypes(BarrysPeanutsWorkflowImpl.class);
+        worker.registerWorkflowImplementationTypes(ShoppingCartWorkflowImpl.class);
 
         // Activities are stateless and thread safe. So a shared instance is used.
-        BarrysPeanutsActivities tripBookingActivities = new BarrysPeanutsActivitiesImpl();
-        worker.registerActivitiesImplementations(tripBookingActivities);
+        ShoppingCartActivities shoppingCartActivities = new ShoppingActivitiesImpl();
+        worker.registerActivitiesImplementations(shoppingCartActivities);
 
         // Start all workers created by this factory.
         factory.start();
@@ -40,10 +40,10 @@ public class BarrysPeanutsExecutor {
 
         // now we can start running instances of our workflow - its state will be persisted
         WorkflowOptions options = WorkflowOptions.newBuilder().setTaskQueue(TASK_QUEUE).build();
-        BarrysPeanutsWorkflow wf = client.newWorkflowStub(BarrysPeanutsWorkflow.class, options);
+        ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class, options);
         try {
-            
-            wf.getBizProcess(helper.getPurchase());
+
+            wf.startWorkflow();
         } catch (WorkflowException e) {
             // Expected
         }

@@ -1,21 +1,8 @@
-import actor.CustomerActor;
 import actor.ShoppingCartActor;
-import akka.actor.Props;
-import akka.actor.typed.ActorRef;
 import akka.actor.typed.ActorSystem;
-import akka.pattern.Patterns;
-import akka.util.Timeout;
 import msg.Address;
-import msg.CreditCard;
 import msg.Customer;
 import msg.PurchaseItem;
-import scala.concurrent.Await;
-
-import akka.util.Timeout;
-import scala.concurrent.Future;
-import scala.concurrent.duration.Duration;
-
-import java.math.BigDecimal;
 
 
 import java.util.concurrent.TimeoutException;
@@ -38,7 +25,8 @@ public class App {
         //TODO figure out away to call back to the Shopping Cart when the actual Checkout completes
         ShoppingCartActor.EmptyCart emptyCart = new ShoppingCartActor.EmptyCart();
         shoppingCartActor.tell(emptyCart);
-;    }
+   }
+
 }
 
 
