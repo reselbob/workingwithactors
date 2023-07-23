@@ -19,7 +19,7 @@ public class CheckOutTaskImpl implements WorkflowTask {
         ShoppingCartActivities activities = new ShoppingActivitiesImpl();
         String fullName = String.format("%s %s", shoppingCartWorkflow.queryPurchaseItems().firstElement().getCustomer().getFirstName(),
                 shoppingCartWorkflow.queryPurchaseItems().firstElement().getCustomer().getLastName());
-        String str = String.format("I am Checkout out customer %s", fullName);
+        String str = String.format("%s : is checking out customer %s", CheckOutTaskImpl.class,fullName);
         System.out.println(str);
         activities.checkOut(this.purchase.getPurchaseItems());
     }

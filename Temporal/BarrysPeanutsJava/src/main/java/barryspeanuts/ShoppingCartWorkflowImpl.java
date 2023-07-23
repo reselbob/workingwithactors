@@ -70,9 +70,7 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
 
     @Override
     public void checkOut(String msg) {
-        System.out.println(msg);
-        ShoppingCartActivities activities = new ShoppingActivitiesImpl();
-        CheckOutReceipt receipt = activities.checkOut(this.purchaseItems);
+        this.queue.put(new CheckOutTaskImpl(this.getPurchase()));
     }
 
     @Override

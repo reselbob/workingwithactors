@@ -23,7 +23,7 @@ public class PayTaskImpl implements WorkflowTask {
         ShoppingCartActivities activities = new ShoppingActivitiesImpl();
         CreditCard creditCard = helper.getCreditCard(this.purchase.getPurchaseItems().firstElement().getCustomer().getFirstName(),
                 this.purchase.getPurchaseItems().firstElement().getCustomer().getLastName());
-        String str = String.format("I am Paying on CreditCard for %s", creditCard.getFullName());
+        String str = String.format("%s is Paying on CreditCard for %s", PayTaskImpl.class, creditCard.getFullName());
         System.out.println(str);
         activities.pay(this.purchase,creditCard);
     }
