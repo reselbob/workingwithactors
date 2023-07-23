@@ -1,4 +1,5 @@
 package barryspeanuts;
+import barryspeanuts.model.Purchase;
 import barryspeanuts.model.PurchaseItem;
 import io.temporal.workflow.QueryMethod;
 import io.temporal.workflow.SignalMethod;
@@ -31,7 +32,7 @@ public interface ShoppingCartWorkflow {
     void clearItems();
 
     @SignalMethod
-    void checkOut();
+    void checkOut(String message);
 
     @SignalMethod
     void pay();
