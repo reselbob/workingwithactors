@@ -1,12 +1,12 @@
 package barryspeanuts;
-
+import barryspeanuts.model.Purchase;
 import barryspeanuts.task.*;
-import io.temporal.workflow.Functions;
-import io.temporal.workflow.QueueConsumer;
+import io.temporal.activity.ActivityOptions;
 import io.temporal.workflow.WorkflowQueue;
 import io.temporal.workflow.Workflow;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.Vector;
 
 import barryspeanuts.model.PurchaseItem;
@@ -14,6 +14,11 @@ import barryspeanuts.model.PurchaseItem;
 public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     private WorkflowQueue<WorkflowTask> queue = Workflow.newWorkflowQueue(1024);
 
+    ActivityOptions activitiesOptions = ActivityOptions.newBuilder()
+            .setStartToCloseTimeout(Duration.ofSeconds(60))
+            .build();
+
+    // Activities;
     @Override
     public void holderMethod() {
 
@@ -62,32 +67,35 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
         this.purchaseItems = new Vector<>();
     }
 
-
     @Override
-    public void CheckOut() {
-        this.queue.put(new CheckOutTaskImpl());
+    public void checkOut() {
+        this.queue.put(new CheckOutTaskImpl(this.getPurchase()));
     }
 
     @Override
-    public void Pay() {
-        this.queue.put(new PayTaskImpl());
+    public void pay() {
+        this.queue.put(new PayTaskImpl(this.getPurchase()));
     }
 
     @Override
-    public void Ship() {
-        this.queue.put(new ShipTaskImpl());
-
+    public void ship() {
+        this.queue.put(new ShipTaskImpl(this.getPurchase(), "FEDEX"));
     }
 
     @Override
-    public void EmptyCart() {
-
-    }
-
-    @Override
-    public void exit() {
+    public void emptyCart() {
         this.queue.put(new EmptyCartTaskImpl());
     }
 
+    Purchase getPurchase(){
+        Vector<PurchaseItem> items = queryPurchaseItems();
+        return new Purchase(items, new Date());
+
+    }
+
     Vector<PurchaseItem> purchaseItems;
+
+
+
+
 }

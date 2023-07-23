@@ -10,10 +10,10 @@ public class CheckOutReceipt {
 
     public CheckOutReceipt(){};
 
-    public CheckOutReceipt(Date confirmationDate, Vector<PurchaseItem> purchaseItems) {
+    public CheckOutReceipt(Purchase purchase, Date confirmationDate) {
         this.id = UUID.randomUUID();
         this.confirmationDate = confirmationDate;
-        this.purchaseItems = purchaseItems;
+        this.purchase = purchase;
     }
 
     public UUID getId() {
@@ -21,12 +21,12 @@ public class CheckOutReceipt {
     }
 
     public Date getConfirmationDate() {
-        return confirmationDate;
+        return this.confirmationDate;
     }
 
-    public Vector<PurchaseItem> getPurchaseItems() {
-        return purchaseItems;
+    public Purchase getPurchase() {
+        return this.purchase;
     }
 
-    Vector<PurchaseItem> purchaseItems;
+    Purchase purchase;
 }

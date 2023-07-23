@@ -9,7 +9,8 @@ public class ShoppingActivitiesImpl implements ShoppingCartActivities {
 
     @Override
     public CheckOutReceipt checkOut(Vector<PurchaseItem> purchaseItems) {
-        return new CheckOutReceipt(new Date(),purchaseItems);
+        Purchase purchase = new Purchase(purchaseItems, new Date());
+        return new CheckOutReceipt(purchase, new Date());
     }
 
     public PaymentReceipt pay(Purchase purchase, CreditCard creditCard) {
@@ -19,7 +20,6 @@ public class ShoppingActivitiesImpl implements ShoppingCartActivities {
 
     public ShippingReceipt ship(Purchase purchase, String shipper) {
         return new ShippingReceipt(purchase, shipper);
-
     }
 
 

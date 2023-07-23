@@ -16,4 +16,24 @@ public class CreditCard {
         this.expirationYear = expirationYear;
         this.securityCode = securityCode;
     }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public int getExpirationMonth() {
+        return expirationMonth;
+    }
+
+    public int getExpirationYear() {
+        return expirationYear;
+    }
+
+    public int getSecurityCode() {
+        return securityCode;
+    }
 }

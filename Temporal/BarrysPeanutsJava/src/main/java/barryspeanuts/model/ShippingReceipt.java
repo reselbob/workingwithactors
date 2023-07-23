@@ -11,7 +11,6 @@ public class ShippingReceipt {
     public ShippingReceipt(Purchase purchase, String shipper) {
         this.id = UUID.randomUUID();
         this.shipDate = new Date();
-        this.purchaseId = purchase.getId();
         this.shipper = shipper;
     }
 
@@ -19,9 +18,7 @@ public class ShippingReceipt {
         return this.id;
     }
 
-    public UUID getPurchaseId() {
-        return purchaseId;
-    }
+
 
     public Date getShipDate() {
         return shipDate;
@@ -32,7 +29,6 @@ public class ShippingReceipt {
     }
 
     UUID id;
-    UUID purchaseId;
     Date shipDate;
     String shipper;
 }

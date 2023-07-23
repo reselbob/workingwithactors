@@ -7,14 +7,9 @@ import java.util.Vector;
 public class Purchase {
 
     public Purchase(){}
-    public Purchase(UUID id, Vector<PurchaseItem> purchaseItems, Date purchaseDate) {
-        this.id = id;
+    public Purchase(Vector<PurchaseItem> purchaseItems, Date purchaseDate) {
         this.purchaseItems = purchaseItems;
         this.purchaseDate = purchaseDate;
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     public Vector<PurchaseItem> getPurchaseItems() {
@@ -26,7 +21,7 @@ public class Purchase {
         return purchaseDate;
     }
 
-    UUID id;
+    String id;
     Vector<PurchaseItem> purchaseItems;
     Date purchaseDate;
 }

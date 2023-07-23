@@ -55,11 +55,14 @@ public class BarrysPeanutsExecutor {
             PurchaseItem purchaseItem = helper.getPurchase();
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
-            wf.addItem(purchaseItem);
+            wf.removeItem(purchaseItem);
             //Vector<PurchaseItem> purchaseItems = wf.query("queryPurchaseItems",Vector<PurchaseItem>.class );
             Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
             String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
             System.out.println(str);
+            wf.checkOut();
+            wf.pay();
+            wf.ship();
         } catch (WorkflowException e) {
             // Expected
         }
