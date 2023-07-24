@@ -11,11 +11,7 @@ import java.util.Vector;
 
 @WorkflowInterface
 public interface ShoppingCartWorkflow {
-
     @WorkflowMethod
-    void holderMethod();
-
-    @SignalMethod
     void startWorkflow();
 
     // Workflow query method. Used to return our greeting as a query value
@@ -35,10 +31,10 @@ public interface ShoppingCartWorkflow {
     void checkOut(String message);
 
     @SignalMethod
-    void pay();
+    void pay(String message);
 
     @SignalMethod
-    void ship();
+    void ship(String message);
     @SignalMethod
     void emptyCart();
 }

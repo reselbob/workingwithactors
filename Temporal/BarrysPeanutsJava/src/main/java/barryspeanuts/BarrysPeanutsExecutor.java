@@ -51,18 +51,20 @@ public class BarrysPeanutsExecutor {
         ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class,options);
         try {
 
+            PurchaseItem purchaseItem = helper.getPurchase();
+
             BatchRequest signalWithStartReq = client.newSignalWithStartRequest();
             signalWithStartReq.add(wf::startWorkflow);
+            signalWithStartReq.add(wf::addItem, purchaseItem);
             client.signalWithStart(signalWithStartReq);
-            PurchaseItem purchaseItem = helper.getPurchase();
-            wf.addItem(purchaseItem);
-            wf.addItem(purchaseItem);
-            wf.addItem(purchaseItem);
-            wf.checkOut("We are checking out");
-            wf.pay();
-            wf.ship();
 
-            //Vector<PurchaseItem> purchaseItems = wf.query("queryPurchaseItems",Vector<PurchaseItem>.class );
+            wf.addItem(purchaseItem);
+            wf.addItem(purchaseItem);
+            wf.addItem(purchaseItem);
+            wf.checkOut(String.format("Workflow ID [%s] is checking out", WORKFLOW_ID));
+            wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
+            wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
+
             Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
             String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
             logger.info(str);

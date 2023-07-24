@@ -15,10 +15,6 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     private static final Logger logger = Workflow.getLogger(ShoppingCartWorkflowImpl.class);
 
     private WorkflowQueue<WorkflowTask> queue = Workflow.newWorkflowQueue(1024);
-    @Override
-    public void holderMethod() {
-
-    }
 
     @Override
     public void startWorkflow() {
@@ -65,17 +61,17 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     }
 
     @Override
-    public void checkOut(String msg) {
+    public void checkOut(String message) {
         this.queue.put(new CheckOutTaskImpl(this.getPurchase()));
     }
 
     @Override
-    public void pay() {
+    public void pay(String message) {
         this.queue.put(new PayTaskImpl(this.getPurchase()));
     }
 
     @Override
-    public void ship() {
+    public void ship(String message) {
         this.queue.put(new ShipTaskImpl(this.getPurchase(), "FEDEX"));
     }
 
