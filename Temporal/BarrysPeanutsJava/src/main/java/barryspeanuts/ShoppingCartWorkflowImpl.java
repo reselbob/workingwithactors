@@ -1,8 +1,6 @@
 package barryspeanuts;
-import barryspeanuts.model.CheckOutReceipt;
 import barryspeanuts.model.Purchase;
 import barryspeanuts.task.*;
-import io.temporal.activity.ActivityOptions;
 import io.temporal.workflow.WorkflowQueue;
 import io.temporal.workflow.Workflow;
 
@@ -11,15 +9,12 @@ import java.util.Date;
 import java.util.Vector;
 
 import barryspeanuts.model.PurchaseItem;
+import org.slf4j.Logger;
 
 public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
+    private static final Logger logger = Workflow.getLogger(ShoppingCartWorkflowImpl.class);
+
     private WorkflowQueue<WorkflowTask> queue = Workflow.newWorkflowQueue(1024);
-
-    ActivityOptions activitiesOptions = ActivityOptions.newBuilder()
-            .setStartToCloseTimeout(Duration.ofSeconds(60))
-            .build();
-
-    // Activities;
     @Override
     public void holderMethod() {
 
@@ -27,11 +22,12 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
 
     @Override
     public void startWorkflow() {
-        System.out.println("Starting Workflow for Barry's Peanuts");
+        logger.info("Starting Workflow for Barry's Peanuts");
         while (true) {
             if (Workflow.getInfo().getHistoryLength() > 2000) {
                 // do continue as new here
-                System.out.println("Workflow history greater than 2000");
+                logger.info("Workflow history greater than 2000");
+                // System.out.println("Workflow history greater than 2000");
             }
 
             WorkflowTask task = this.queue.cancellablePoll(Duration.ofDays(30));
