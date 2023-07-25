@@ -76,7 +76,7 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     }
 
     @Override
-    public void emptyCart() {
+    public void emptyCart(String message) {
         this.queue.put(new EmptyCartTaskImpl());
     }
 
@@ -87,8 +87,5 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     }
 
     Vector<PurchaseItem> purchaseItems;
-
-
-
 
 }

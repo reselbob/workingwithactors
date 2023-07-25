@@ -65,8 +65,16 @@ public class BarrysPeanutsExecutor {
             wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
             wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
 
+
             Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
             String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
+            logger.info(str);
+
+            wf.emptyCart(String.format("Workflow ID [%s] is emptying cart", WORKFLOW_ID));
+
+            purchaseItems = wf.queryPurchaseItems();
+
+            str = String.format("the count of purchase items  after the cart is emptied is %s", purchaseItems.toArray().length);
             logger.info(str);
 
         } catch (WorkflowException e) {

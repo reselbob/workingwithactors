@@ -1,12 +1,9 @@
 package barryspeanuts;
-import barryspeanuts.model.Purchase;
 import barryspeanuts.model.PurchaseItem;
 import io.temporal.workflow.QueryMethod;
 import io.temporal.workflow.SignalMethod;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
-
-import java.util.UUID;
 import java.util.Vector;
 
 @WorkflowInterface
@@ -36,5 +33,5 @@ public interface ShoppingCartWorkflow {
     @SignalMethod
     void ship(String message);
     @SignalMethod
-    void emptyCart();
+    void emptyCart(String message);
 }
