@@ -29,12 +29,10 @@ public class PaymentActor extends AbstractBehavior<Object> {
     @Override
     public Receive<Object> createReceive() {
         return newReceiveBuilder()
-                .onMessage(Payment.class, this::handlePayment)
+                .onMessage(PaymentInfo.class, this::handlePayment)
                 .build();
     }
-
-
-    private Behavior<Object> handlePayment(Payment msg) {
+    private Behavior<Object> handlePayment(PaymentInfo msg) {
         CreditCard creditCard = msg.getCreditCard();
 
         double amount = 0;
@@ -61,9 +59,9 @@ public class PaymentActor extends AbstractBehavior<Object> {
         return this;
     }
 
-    public static class Payment {
+    public static class PaymentInfo {
 
-        public Payment(Customer customer, CreditCard creditCard, Vector<PurchaseItem> purchaseItems) {
+        public PaymentInfo(Customer customer, CreditCard creditCard, Vector<PurchaseItem> purchaseItems) {
             this.id = UUID.randomUUID();
             this.customer = customer;
             this.creditCard = creditCard;

@@ -20,18 +20,10 @@ Here is the command for starting the Temporal Server on a local Ubuntu machine. 
 
 ---
 
-## (3) Navigate to the application working directory
 
-In a sepaarate terminal window run:
+## (3) Start the application
 
-
-```
-cd ./app
-```
-
-## (4) Start the application
-
-In yet another sepaarate terminal window run:
+In yet another separate terminal window run:
 
 ```
 mvn exec:java -Dexec.mainClass="barryspeanuts.BarrysPeanutsExecutor"
