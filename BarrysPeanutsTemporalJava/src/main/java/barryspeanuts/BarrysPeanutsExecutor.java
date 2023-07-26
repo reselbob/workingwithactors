@@ -64,7 +64,7 @@ public class BarrysPeanutsExecutor {
             try {
                 wf.checkOut(String.format("Workflow ID [%s] is checking out", WORKFLOW_ID));
             } catch (Exception e) {
-                logger.error(e.getLocalizedMessage());
+                logger.error(e.getMessage());
                 //TODO Provide compensation behavior, but for now, just error
                 throw new RuntimeException(e);
             }
@@ -73,14 +73,14 @@ public class BarrysPeanutsExecutor {
                 wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
             } catch (Exception e) {
                 //TODO Provide compensation behavior, but for now, just error
-                logger.error(e.getLocalizedMessage());
+                logger.error(e.getMessage());
                 throw new RuntimeException(e);
             }
             try {
                 wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
             } catch (Exception e) {
                 //TODO Provide compensation behavior, but for now, just error
-                logger.error(e.getLocalizedMessage());
+                logger.error(e.getMessage());
                 throw new RuntimeException(e);
             }
 
