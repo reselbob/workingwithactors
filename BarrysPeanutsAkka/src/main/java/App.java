@@ -4,7 +4,6 @@ import msg.Address;
 import msg.Customer;
 import msg.PurchaseItem;
 
-
 import java.util.concurrent.TimeoutException;
 
 
@@ -26,7 +25,6 @@ public class App {
         ShoppingCartActor.EmptyCart emptyCart = new ShoppingCartActor.EmptyCart();
         shoppingCartActor.tell(emptyCart);
    }
-
 }
 
 

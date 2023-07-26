@@ -27,6 +27,7 @@ public class CheckOutTaskImpl implements WorkflowTask {
         String str = String.format("%s : is checking out customer %s", CheckOutTaskImpl.class,fullName);
         logger.info(str);
 
+        // call the activity
         activities.checkOut(this.purchase.getPurchaseItems());
     }
 }

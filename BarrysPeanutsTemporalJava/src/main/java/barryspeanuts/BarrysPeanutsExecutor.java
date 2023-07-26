@@ -61,10 +61,28 @@ public class BarrysPeanutsExecutor {
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
-            wf.checkOut(String.format("Workflow ID [%s] is checking out", WORKFLOW_ID));
-            wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
-            wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
+            try {
+                wf.checkOut(String.format("Workflow ID [%s] is checking out", WORKFLOW_ID));
+            } catch (Exception e) {
+                logger.error(e.getLocalizedMessage());
+                //TODO Provide compensation behavior, but for now, just error
+                throw new RuntimeException(e);
+            }
 
+            try {
+                wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
+            } catch (Exception e) {
+                //TODO Provide compensation behavior, but for now, just error
+                logger.error(e.getLocalizedMessage());
+                throw new RuntimeException(e);
+            }
+            try {
+                wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
+            } catch (Exception e) {
+                //TODO Provide compensation behavior, but for now, just error
+                logger.error(e.getLocalizedMessage());
+                throw new RuntimeException(e);
+            }
 
             Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
             String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
