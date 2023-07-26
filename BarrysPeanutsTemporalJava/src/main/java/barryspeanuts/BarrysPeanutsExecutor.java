@@ -51,7 +51,7 @@ public class BarrysPeanutsExecutor {
         ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class, options);
         try {
 
-            PurchaseItem purchaseItem = mockHelper.getPurchase();
+            PurchaseItem purchaseItem = mockHelper.getPurchaseItem();
 
             BatchRequest signalWithStartReq = client.newSignalWithStartRequest();
             signalWithStartReq.add(wf::startWorkflow);

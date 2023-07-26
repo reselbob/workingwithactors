@@ -14,7 +14,7 @@ public class mockHelper {
         return new Customer("Josiah", "Bartlet", "prez@whitehouse.gove", "202 456 1414", getAddress());
     }
 
-    public static PurchaseItem getPurchase(){
+    public static PurchaseItem getPurchaseItem(){
         return new PurchaseItem(getCustomer(), "Deluxe Peanuts:", 3, 12.99 ,5);
     }
 
