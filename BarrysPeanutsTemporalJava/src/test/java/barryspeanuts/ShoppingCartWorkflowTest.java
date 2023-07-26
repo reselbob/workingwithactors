@@ -1,6 +1,6 @@
 package barryspeanuts;
 
-import barryspeanuts.helper.helper;
+import barryspeanuts.mock.mockHelper;
 import barryspeanuts.model.PurchaseItem;
 
 import io.temporal.client.WorkflowOptions;
@@ -36,7 +36,7 @@ public class ShoppingCartWorkflowTest {
 
     @Test
     public void testMockedGetGreeting() {
-        PurchaseItem purchase = helper.getPurchase();
+        PurchaseItem purchase = mockHelper.getPurchase();
         /* 
         BarrysPeanutsActivities formatActivities = mock(BarrysPeanutsActivities.class, withSettings().withoutAnnotations());
         when(formatActivities.checkOut(purchase).thenReturn(purchase);

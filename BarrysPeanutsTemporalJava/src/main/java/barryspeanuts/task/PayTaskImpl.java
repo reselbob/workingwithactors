@@ -4,7 +4,7 @@ import barryspeanuts.ShoppingActivitiesImpl;
 import barryspeanuts.ShoppingCartActivities;
 import barryspeanuts.ShoppingCartWorkflow;
 import barryspeanuts.ShoppingCartWorkflowImpl;
-import barryspeanuts.helper.helper;
+import barryspeanuts.mock.mockHelper;
 import barryspeanuts.model.CreditCard;
 import barryspeanuts.model.Purchase;
 import io.temporal.workflow.Workflow;
@@ -23,7 +23,7 @@ public class PayTaskImpl implements WorkflowTask {
     @Override
     public void process(ShoppingCartWorkflow shoppingCartWorkflow) {
         ShoppingCartActivities activities = new ShoppingActivitiesImpl();
-        CreditCard creditCard = helper.getCreditCard(this.purchase.getPurchaseItems().firstElement().getCustomer().getFirstName(),
+        CreditCard creditCard = mockHelper.getCreditCard(this.purchase.getPurchaseItems().firstElement().getCustomer().getFirstName(),
                 this.purchase.getPurchaseItems().firstElement().getCustomer().getLastName());
         String str = String.format("%s is Paying on CreditCard for %s", PayTaskImpl.class, creditCard.getFullName());
         logger.info(str);

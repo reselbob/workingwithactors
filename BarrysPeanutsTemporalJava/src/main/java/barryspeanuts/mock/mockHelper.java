@@ -1,11 +1,11 @@
-package barryspeanuts.helper;
+package barryspeanuts.mock;
 
 import barryspeanuts.model.Address;
 import barryspeanuts.model.Customer;
 import barryspeanuts.model.PurchaseItem;
 import barryspeanuts.model.CreditCard;
 
-public class helper {
+public class mockHelper {
     public static Address getAddress(){
         return new Address("1600 Pennsylvania Avenue NW.", "West Wing", "Washington", "D.C.", "20500","USA" );
     }

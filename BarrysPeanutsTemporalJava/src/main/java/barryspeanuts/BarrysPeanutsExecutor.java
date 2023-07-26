@@ -1,6 +1,6 @@
 package barryspeanuts;
 
-import barryspeanuts.helper.helper;
+import barryspeanuts.mock.mockHelper;
 import barryspeanuts.model.PurchaseItem;
 import io.temporal.client.*;
 import io.temporal.serviceclient.WorkflowServiceStubs;
@@ -48,10 +48,10 @@ public class BarrysPeanutsExecutor {
 
         // now we can start running instances of our workflow - its state will be persisted
         WorkflowOptions options = WorkflowOptions.newBuilder().setTaskQueue(TASK_QUEUE).setWorkflowId(WORKFLOW_ID).build();
-        ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class,options);
+        ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class, options);
         try {
 
-            PurchaseItem purchaseItem = helper.getPurchase();
+            PurchaseItem purchaseItem = mockHelper.getPurchase();
 
             BatchRequest signalWithStartReq = client.newSignalWithStartRequest();
             signalWithStartReq.add(wf::startWorkflow);
@@ -72,15 +72,15 @@ public class BarrysPeanutsExecutor {
             try {
                 wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
             } catch (Exception e) {
-                //TODO Provide compensation behavior, but for now, just error
                 logger.error(e.getMessage());
+                //TODO Provide compensation behavior, but for now, just error
                 throw new RuntimeException(e);
             }
             try {
                 wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
             } catch (Exception e) {
-                //TODO Provide compensation behavior, but for now, just error
                 logger.error(e.getMessage());
+                //TODO Provide compensation behavior, but for now, just error
                 throw new RuntimeException(e);
             }
 
