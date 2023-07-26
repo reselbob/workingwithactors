@@ -11,7 +11,8 @@ public interface ShoppingCartWorkflow {
     @WorkflowMethod
     void startWorkflow();
 
-    // Workflow query method. Used to return our greeting as a query value
+    @QueryMethod
+    ShoppingCartActivities queryActivities();
     @QueryMethod
     Vector<PurchaseItem> queryPurchaseItems();
 

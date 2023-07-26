@@ -21,10 +21,9 @@ public class ShipTaskImpl implements WorkflowTask {
 
     @Override
     public void process(ShoppingCartWorkflow shoppingCartWorkflow) {
-        ShoppingCartActivities activities = new ShoppingActivitiesImpl();
+        ShoppingCartActivities activities = shoppingCartWorkflow.queryActivities();
         String str = String.format("%s : is shipping to %s", ShipTaskImpl.class,this.shipper);
         logger.info(str);
-        // System.out.println(str);
         activities.ship(this.purchase,this.shipper);
     }
 }

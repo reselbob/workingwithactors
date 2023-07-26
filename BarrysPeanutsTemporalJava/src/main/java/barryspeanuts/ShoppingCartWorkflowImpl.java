@@ -1,6 +1,8 @@
 package barryspeanuts;
 import barryspeanuts.model.Purchase;
 import barryspeanuts.task.*;
+import io.temporal.activity.ActivityCancellationType;
+import io.temporal.activity.ActivityOptions;
 import io.temporal.workflow.WorkflowQueue;
 import io.temporal.workflow.Workflow;
 
@@ -13,6 +15,11 @@ import org.slf4j.Logger;
 
 public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     private static final Logger logger = Workflow.getLogger(ShoppingCartWorkflowImpl.class);
+
+    ShoppingCartActivities activities = Workflow.newActivityStub(ShoppingCartActivities.class,
+            ActivityOptions.newBuilder()
+                    .setScheduleToCloseTimeout(Duration.ofSeconds(5))
+                    .build());
 
     private WorkflowQueue<WorkflowTask> queue = Workflow.newWorkflowQueue(1024);
 
@@ -33,6 +40,11 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
             }
             task.process(this);
         }
+    }
+
+    @Override
+    public ShoppingCartActivities queryActivities() {
+        return this.activities;
     }
 
 

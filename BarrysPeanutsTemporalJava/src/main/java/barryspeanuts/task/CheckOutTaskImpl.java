@@ -21,7 +21,7 @@ public class CheckOutTaskImpl implements WorkflowTask {
 
     @Override
     public void process(ShoppingCartWorkflow shoppingCartWorkflow) {
-        ShoppingCartActivities activities = new ShoppingActivitiesImpl();
+        ShoppingCartActivities activities = shoppingCartWorkflow.queryActivities();
         String fullName = String.format("%s %s", shoppingCartWorkflow.queryPurchaseItems().firstElement().getCustomer().getFirstName(),
                 shoppingCartWorkflow.queryPurchaseItems().firstElement().getCustomer().getLastName());
         String str = String.format("%s : is checking out customer %s", CheckOutTaskImpl.class,fullName);
