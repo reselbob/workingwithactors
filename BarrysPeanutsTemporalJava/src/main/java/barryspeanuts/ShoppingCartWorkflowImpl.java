@@ -35,7 +35,7 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
 
             WorkflowTask task = this.queue.cancellablePoll(Duration.ofDays(30));
             if (task == null) {
-                System.out.println("Breaking task");
+                logger.info("Breaking task");
                 break;
             }
             task.process(this);
@@ -89,7 +89,8 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
 
     @Override
     public void emptyCart(String message) {
-        this.queue.put(new EmptyCartTaskImpl());
+        this.purchaseItems = new Vector<>();
+        // this.queue.put(new EmptyCartTaskImpl());
     }
 
     Purchase getPurchase(){
