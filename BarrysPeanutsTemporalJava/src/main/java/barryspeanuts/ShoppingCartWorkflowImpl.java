@@ -90,7 +90,6 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     @Override
     public void emptyCart(String message) {
         this.purchaseItems = new Vector<>();
-        // this.queue.put(new EmptyCartTaskImpl());
     }
 
     Purchase getPurchase(){
