@@ -1,4 +1,5 @@
 package barryspeanuts;
+
 import barryspeanuts.model.Purchase;
 import barryspeanuts.task.*;
 import io.temporal.activity.ActivityCancellationType;
@@ -15,12 +16,7 @@ import org.slf4j.Logger;
 
 public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     private static final Logger logger = Workflow.getLogger(ShoppingCartWorkflowImpl.class);
-
-    ShoppingCartActivities activities = Workflow.newActivityStub(ShoppingCartActivities.class,
-            ActivityOptions.newBuilder()
-                    .setScheduleToCloseTimeout(Duration.ofSeconds(5))
-                    .build());
-
+    ShoppingCartActivities activities = new ShoppingActivitiesImpl();
     private WorkflowQueue<WorkflowTask> queue = Workflow.newWorkflowQueue(1024);
 
     @Override
@@ -46,7 +42,6 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     public ShoppingCartActivities queryActivities() {
         return this.activities;
     }
-
 
     @Override
     public Vector<PurchaseItem> queryPurchaseItems() {
@@ -92,7 +87,7 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
         this.purchaseItems = new Vector<>();
     }
 
-    Purchase getPurchase(){
+    Purchase getPurchase() {
         Vector<PurchaseItem> items = queryPurchaseItems();
         return new Purchase(items, new Date());
 
