@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import msg.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 public class ShoppingCartActor extends AbstractBehavior<Object> {
@@ -20,7 +21,7 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
 
     private ShoppingCartActor(ActorContext<Object> context) {
         super(context);
-        this.purchaseItems = new Vector<PurchaseItem>();
+        this.purchaseItems = new ArrayList<>();
     }
 
     public static Behavior<Object> create() {
@@ -38,7 +39,8 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
                 .onMessage(RemoveItem.class, this::handleRemoveItem)
                 .onMessage(EmptyCart.class, this::handleEmptyCart)
                 .onMessage(CheckoutCart.class, this::handleCheckoutCart)
-                .onMessage(ConfirmationMessage.class, this::handleConfirmationMessage)
+                .onMessage(PaymentActor.PaymentInfo.class, this::handlePayment)
+                .onMessage(ShipperActor.ShipmentInfo.class, this::handleShipping)
                 .build();
     }
 
@@ -48,6 +50,7 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
     }
 
     private Behavior<Object> handleAddItem(AddItem msg) {
+        logger.info("Adding an Item");
         this.purchaseItems.add(msg.purchaseItem);
         return this;
     }
@@ -58,10 +61,31 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
     }
 
 
-    private Behavior<Object> handleEmptyCart(EmptyCart msg) {
+    private Behavior<Object> handleEmptyCart(EmptyCart msg) throws InterruptedException {
         String str = String.format("ShoppingCart is emptying the cart of %s items a checkout at %s. \n ", this.purchaseItems.toArray().length, new Date());
         logger.info(str);
-        this.purchaseItems = new Vector<PurchaseItem>();
+        this.purchaseItems = new ArrayList<PurchaseItem>();
+        return this;
+    }
+
+    private Behavior<Object> handlePayment(PaymentActor.PaymentInfo msg) {
+        // Tell the Payment Actor to pay
+        ActorRef<Object> paymentActor = ActorSystem.create(PaymentActor.create(), "paymentActor");
+        Customer customer = this.purchaseItems.get(0).getCustomer();
+        String firstName = customer.getFirstName();
+        String lastName = customer.getLastName();
+        CreditCard creditCard = helper.MockHelper.getCreditCard(firstName, lastName);
+        PaymentActor.PaymentInfo paymentInfo = new PaymentActor.PaymentInfo(customer, creditCard, msg.getPaymentAmount());
+        paymentActor.tell(paymentInfo);
+        return this;
+    }
+
+    private Behavior<Object> handleShipping(ShipperActor.ShipmentInfo msg) {
+        // Tell the Shipper to ship
+        ActorRef<Object> shipperActor = ActorSystem.create(ShipperActor.create(), "shipperActor");
+        String shipper = helper.MockHelper.getShipper();
+        ShipperActor.ShipmentInfo shippingInfo = new ShipperActor.ShipmentInfo(shipper, this.purchaseItems);
+        shipperActor.tell(shippingInfo);
         return this;
     }
 
@@ -74,27 +98,10 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         ActorRef<Object> checkoutActor = ActorSystem.create(CheckOutActor.create(), "checkoutActor");
         CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.purchaseItems);
         checkoutActor.tell(startCheckout);
-
-
-        // Tell the Payment Actor to pay
-        ActorRef<Object> paymentActor = ActorSystem.create(PaymentActor.create(), "paymentActor");
-        Customer customer = this.purchaseItems.firstElement().getCustomer();
-        String firstName = customer.getFirstName();
-        String lastName = customer.getLastName();
-        CreditCard creditCard = helper.MockHelper.getCreditCard(firstName, lastName);
-        PaymentActor.PaymentInfo paymentInfo = new PaymentActor.PaymentInfo(customer, creditCard, this.purchaseItems);
-        paymentActor.tell(paymentInfo);
-
-        // Tell the Shipper to ship
-        ActorRef<Object> shipperActor = ActorSystem.create(ShipperActor.create(), "shipperActor");
-        String shipper = helper.MockHelper.getShipper();
-        ShipperActor.ShipmentInfo shippingInfo = new ShipperActor.ShipmentInfo(shipper, this.purchaseItems);
-        shipperActor.tell(shippingInfo);
-
         return this;
     }
 
-    Vector<PurchaseItem> purchaseItems;
+    ArrayList<PurchaseItem> purchaseItems;
     public static class AddItem {
         public AddItem(PurchaseItem purchaseItem) {
             this.purchaseItem = purchaseItem;

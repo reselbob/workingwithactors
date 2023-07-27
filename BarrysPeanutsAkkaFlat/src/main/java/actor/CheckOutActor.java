@@ -10,6 +10,7 @@ import msg.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 import java.util.Vector;
@@ -44,15 +45,15 @@ public class CheckOutActor extends AbstractBehavior<Object> {
 
 
     public static class StartCheckout {
-        public StartCheckout(Vector<PurchaseItem> purchaseItems) {
+        public StartCheckout(ArrayList<PurchaseItem> purchaseItems) {
             this.purchaseItems = purchaseItems;
         }
 
-        public Vector<PurchaseItem> getPurchaseItems() {
+        public ArrayList<PurchaseItem> getPurchaseItems() {
             return purchaseItems;
         }
 
-        Vector<PurchaseItem> purchaseItems;
+        ArrayList<PurchaseItem> purchaseItems;
 
     }
 

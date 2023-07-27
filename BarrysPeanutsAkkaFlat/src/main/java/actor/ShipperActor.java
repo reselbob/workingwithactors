@@ -10,6 +10,7 @@ import msg.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 import java.util.Vector;
@@ -54,7 +55,7 @@ public class ShipperActor extends AbstractBehavior<Object> {
 
     public static class ShipmentInfo {
 
-        public ShipmentInfo(String shipper, Vector<PurchaseItem> purchaseItems) {
+        public ShipmentInfo(String shipper, ArrayList<PurchaseItem> purchaseItems) {
             this.id = UUID.randomUUID();
             this.shipper = shipper;
             this.purchaseItems = purchaseItems;
@@ -68,7 +69,7 @@ public class ShipperActor extends AbstractBehavior<Object> {
             return shipper;
         }
 
-        public Vector<PurchaseItem> getPurchaseItems() {
+        public ArrayList<PurchaseItem> getPurchaseItems() {
             return purchaseItems;
         }
 
@@ -76,7 +77,7 @@ public class ShipperActor extends AbstractBehavior<Object> {
 
         String shipper;
 
-        Vector<PurchaseItem> purchaseItems;
+        ArrayList<PurchaseItem> purchaseItems;
     }
 
     public static class ShippingReceipt {

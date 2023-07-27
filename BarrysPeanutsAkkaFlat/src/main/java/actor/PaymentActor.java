@@ -39,10 +39,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
     private Behavior<Object> handlePayment(PaymentInfo msg) {
         CreditCard creditCard = msg.getCreditCard();
 
-        double amount = 0;
-        for(PurchaseItem item : msg.getPurchaseItems()){
-            amount = amount + item.getTotal();
-        }
+        double amount = msg.getPaymentAmount();
         // Now pay
         String str = String.format("%s is Paying with Credit Card for %s with Credit Card Number %s on %s for the amount of %s\n",
                 PaymentActor.class,
@@ -57,11 +54,11 @@ public class PaymentActor extends AbstractBehavior<Object> {
 
     public static class PaymentInfo {
 
-        public PaymentInfo(Customer customer, CreditCard creditCard, Vector<PurchaseItem> purchaseItems) {
+        public PaymentInfo(Customer customer, CreditCard creditCard, double paymentAmount) {
             this.id = UUID.randomUUID();
             this.customer = customer;
             this.creditCard = creditCard;
-            this.purchaseItems = purchaseItems;
+            this.paymentAmount = paymentAmount;
         }
 
         public UUID getId() {
@@ -69,10 +66,6 @@ public class PaymentActor extends AbstractBehavior<Object> {
         }
         public Customer getCustomer() {
             return customer;
-        }
-
-        public Vector<PurchaseItem> getPurchaseItems() {
-            return purchaseItems;
         }
 
         public CreditCard getCreditCard() {
@@ -115,7 +108,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
             return creditCardNumber;
         }
 
-        public double getAmount() {
+        public double getPaymentAmount() {
             return amount;
         }
 
