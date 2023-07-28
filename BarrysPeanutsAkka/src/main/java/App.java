@@ -21,7 +21,7 @@ public class App {
         shoppingCartActor.tell(item);
         ShoppingCartActor.CheckoutCart checkout = new ShoppingCartActor.CheckoutCart();
         shoppingCartActor.tell(checkout);
-        //TODO figure out away to call back to the Shopping Cart when the actual Checkout completes
+        //BEWARE!!! Calling EmptyCart() here can cause race conditions
         ShoppingCartActor.EmptyCart emptyCart = new ShoppingCartActor.EmptyCart();
         shoppingCartActor.tell(emptyCart);
    }

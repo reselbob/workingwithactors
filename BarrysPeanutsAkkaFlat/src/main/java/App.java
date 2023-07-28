@@ -18,11 +18,15 @@ public class App {
     public static void main(String[] args) throws InterruptedException, TimeoutException {
         Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
         logger.info("Starting Barry's Gourmet Peanuts");
+
         Customer customer = helper.MockHelper.getCustomer();
         Address address = helper.MockHelper.getAddress();
+
         ArrayList<PurchaseItem> purchaseItems = new ArrayList<>();
         PurchaseItem purchase = new PurchaseItem(customer, "Barry's Gourmet Peanuts", 5, 1, 10.99, address, address);
+
         ShoppingCartActor.AddItem item = new ShoppingCartActor.AddItem(purchase);
+
         ActorSystem<Object> shoppingCartActor = ActorSystem.create(ShoppingCartActor.create(), "shoppingCartActor");
         purchaseItems.add(purchase);
         shoppingCartActor.tell(item);
@@ -32,7 +36,6 @@ public class App {
 
         purchaseItems.add(purchase);
         shoppingCartActor.tell(item);
-
 
         //Checkout
         ShoppingCartActor.CheckoutCart checkout = new ShoppingCartActor.CheckoutCart();
