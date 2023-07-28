@@ -26,4 +26,8 @@ public  class MockHelper {
                 "99999-9999",
                 "USA");
     }
+
+    static public String getShipper(){
+        return "FEDEX";
+    }
 }

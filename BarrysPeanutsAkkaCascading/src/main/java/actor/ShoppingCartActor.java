@@ -9,23 +9,20 @@ import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 import msg.*;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
 
-import akka.util.Timeout;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scala.concurrent.Await;
-import scala.concurrent.Future;
-import scala.concurrent.duration.Duration;
+
 
 public class ShoppingCartActor extends AbstractBehavior<Object> {
     Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
 
     private ShoppingCartActor(ActorContext<Object> context) {
         super(context);
-        this.purchaseItems = new Vector<PurchaseItem>();
+        this.purchaseItems = new ArrayList<PurchaseItem>();
     }
 
     public static Behavior<Object> create() {
@@ -61,7 +58,7 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
     private Behavior<Object> handleEmptyCart(EmptyCart msg) {
         String str = String.format("ShoppingCart is emptying the cart of %s items a checkout at %s. \n ", this.purchaseItems.toArray().length, new Date());
         logger.info(str);
-        this.purchaseItems = new Vector<PurchaseItem>();
+        this.purchaseItems = new ArrayList<PurchaseItem>();
         return this;
     }
 
@@ -69,12 +66,14 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         String str = String.format("ShoppingCart is starting a checkout of %s items a checkout at %s. \n", this.purchaseItems.toArray().length, new Date());
         logger.info(str);
         ActorRef<Object> checkoutActor = ActorSystem.create(CheckOutActor.create(), "checkoutActor");
-        CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.purchaseItems);
+        Customer customer = this.purchaseItems.get(0).getCustomer();
+        CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.purchaseItems,
+                helper.MockHelper.getCreditCard(customer.getFirstName(), customer.getLastName()), customer);
         checkoutActor.tell(startCheckout);
         return this;
     }
 
-    Vector<PurchaseItem> purchaseItems;
+    ArrayList<PurchaseItem> purchaseItems;
     public static class AddItem {
         public AddItem(PurchaseItem purchaseItem) {
             this.purchaseItem = purchaseItem;

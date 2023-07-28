@@ -10,6 +10,7 @@ import msg.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 import java.util.Vector;
@@ -54,17 +55,16 @@ public class PaymentActor extends AbstractBehavior<Object> {
         PaymentActor.PaymentReceipt paymentReceipt = new PaymentActor.PaymentReceipt(msg.customer,new Date(), msg.creditCard.getCreditCardNumber(),amount);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");
         customerActor.tell(paymentReceipt);
-
-        //Send a paid message back to CheckOut
-        ActorSystem<Object> checkOutActor = ActorSystem.create(CheckOutActor.create(), "checkOutActor");
-        CheckOutActor.Paid paid = new CheckOutActor.Paid(msg.getId(),msg.getPurchaseItems(),new Date());
-        checkOutActor.tell(paid);
+        ActorSystem<Object> shipperActor = ActorSystem.create(ShipperActor.create(), "shipperActor");
+        ShipperActor.ShipmentInfo shipmentInfo = new ShipperActor.ShipmentInfo(helper.MockHelper.getShipper(),
+                msg.getPurchaseItems());
+        shipperActor.tell(shipmentInfo);
         return this;
     }
 
     public static class PaymentInfo {
 
-        public PaymentInfo(Customer customer, CreditCard creditCard, Vector<PurchaseItem> purchaseItems) {
+        public PaymentInfo(Customer customer, CreditCard creditCard, ArrayList<PurchaseItem> purchaseItems) {
             this.id = UUID.randomUUID();
             this.customer = customer;
             this.creditCard = creditCard;
@@ -78,7 +78,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
             return customer;
         }
 
-        public Vector<PurchaseItem> getPurchaseItems() {
+        public ArrayList<PurchaseItem> getPurchaseItems() {
             return purchaseItems;
         }
 
@@ -93,7 +93,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
         UUID id;
         Customer customer;
 
-        Vector<PurchaseItem> purchaseItems;
+        ArrayList<PurchaseItem> purchaseItems;
         CreditCard creditCard;
         double paymentAmount;
     }

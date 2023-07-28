@@ -13,8 +13,8 @@ import msg.PurchaseItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
 
 public class CustomerActor extends AbstractBehavior<Object> {
     Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
@@ -35,7 +35,6 @@ public class CustomerActor extends AbstractBehavior<Object> {
         return newReceiveBuilder()
                 .onMessage(PaymentActor.PaymentReceipt.class, this::handlePaymentReceipt)
                 .onMessage(ShipperActor.ShippingReceipt.class, this::handleShippingReceipt)
-                .onMessage(CreditCardRequest.class, this::handleCreditCardRequest)
                 .build();
     }
 
@@ -53,7 +52,7 @@ public class CustomerActor extends AbstractBehavior<Object> {
 
     private Behavior<Object> handleShippingReceipt(ShipperActor.ShippingReceipt msg) {
         Date today = new Date();
-        Vector<PurchaseItem> items = msg.getPurchaseItems();
+        ArrayList<PurchaseItem> items = msg.getPurchaseItems();
         String firstName = null;
         String lastName = null;
         String shipper = msg.getShipper();
@@ -72,22 +71,14 @@ public class CustomerActor extends AbstractBehavior<Object> {
         return this;
     }
 
-    private Behavior<Object> handleCreditCardRequest(CreditCardRequest msg) {
-        Customer customer = msg.getPurchaseItems().firstElement().getCustomer();
-        CreditCard mockCreditCard = MockHelper.getCreditCard(customer.getFirstName(), customer.getLastName());
-        ActorSystem<Object> checkOutActor = ActorSystem.create(CheckOutActor.create(), "checkOutActor");
-        CheckOutActor.Pay pay = new CheckOutActor.Pay(mockCreditCard,msg.getPurchaseItems());
-        //Send the information back to the CheckOutActor
-        checkOutActor.tell(pay);
-        return this;
-    }
+
 
     public static class CreditCardRequest {
-        Vector<PurchaseItem> purchaseItems;
-        public CreditCardRequest(Vector<PurchaseItem> purchaseItems) {
+        ArrayList<PurchaseItem> purchaseItems;
+        public CreditCardRequest(ArrayList<PurchaseItem> purchaseItems) {
             this.purchaseItems = purchaseItems;
         }
-        public Vector<PurchaseItem> getPurchaseItems() {
+        public ArrayList<PurchaseItem> getPurchaseItems() {
             return this.purchaseItems;
         }
     }

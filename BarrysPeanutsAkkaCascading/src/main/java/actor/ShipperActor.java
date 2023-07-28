@@ -10,9 +10,9 @@ import msg.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
-import java.util.Vector;
 
 public class ShipperActor extends AbstractBehavior<Object> {
     Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
@@ -51,18 +51,12 @@ public class ShipperActor extends AbstractBehavior<Object> {
         ShipperActor.ShippingReceipt shippingReceipt = new ShipperActor.ShippingReceipt(msg.getShipper(), msg.getPurchaseItems(),shipDate);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");
         customerActor.tell(shippingReceipt);
-
-        //Send a shipping receipt back to CheckOut
-
-        ActorSystem<Object> checkOutActor = ActorSystem.create(CheckOutActor.create(), "checkOutActor");
-        CheckOutActor.Paid paid = new CheckOutActor.Paid(msg.getId(),msg.getPurchaseItems(),new Date());
-        checkOutActor.tell(shippingReceipt);
         return this;
     }
 
     public static class ShipmentInfo {
 
-        public ShipmentInfo(String shipper, Vector<PurchaseItem> purchaseItems) {
+        public ShipmentInfo(String shipper, ArrayList<PurchaseItem> purchaseItems) {
             this.id = UUID.randomUUID();
             this.shipper = shipper;
             this.purchaseItems = purchaseItems;
@@ -76,7 +70,7 @@ public class ShipperActor extends AbstractBehavior<Object> {
             return shipper;
         }
 
-        public Vector<PurchaseItem> getPurchaseItems() {
+        public ArrayList<PurchaseItem> getPurchaseItems() {
             return purchaseItems;
         }
 
@@ -84,12 +78,12 @@ public class ShipperActor extends AbstractBehavior<Object> {
 
         String shipper;
 
-        Vector<PurchaseItem> purchaseItems;
+        ArrayList<PurchaseItem> purchaseItems;
     }
 
     public static class ShippingReceipt {
 
-        public ShippingReceipt(String shipper, Vector<PurchaseItem> purchaseItems, Date shipDate) {
+        public ShippingReceipt(String shipper, ArrayList<PurchaseItem> purchaseItems, Date shipDate) {
             this.shipper = shipper;
             this.purchaseItems = purchaseItems;
             this.shipDate = shipDate;
@@ -99,7 +93,7 @@ public class ShipperActor extends AbstractBehavior<Object> {
             return shipper;
         }
 
-        public Vector<PurchaseItem> getPurchaseItems() {
+        public ArrayList<PurchaseItem> getPurchaseItems() {
             return purchaseItems;
         }
 
@@ -108,7 +102,7 @@ public class ShipperActor extends AbstractBehavior<Object> {
         }
 
         String shipper;
-        Vector<PurchaseItem> purchaseItems;
+        ArrayList<PurchaseItem> purchaseItems;
         Date shipDate;
     }
 

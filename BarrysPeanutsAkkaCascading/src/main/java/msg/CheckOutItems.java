@@ -1,16 +1,17 @@
 package msg;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class CheckOutItems {
-    public CheckOutItems(Vector<PurchaseItem> items) {
+    public CheckOutItems(ArrayList<PurchaseItem> items) {
         this.items = items;
 
     }
 
-    public Vector<PurchaseItem> getItems() {
+    public ArrayList<PurchaseItem> getItems() {
         return items;
     }
 
-    public Vector<PurchaseItem> items;
+    public ArrayList<PurchaseItem> items;
 }
