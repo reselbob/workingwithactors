@@ -7,12 +7,15 @@ import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 import msg.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.UUID;
 import java.util.Vector;
 
 public class CheckOutActor extends AbstractBehavior<Object> {
+    Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
 
     private CheckOutActor(ActorContext<Object> context) {
         super(context);
@@ -48,7 +51,7 @@ public class CheckOutActor extends AbstractBehavior<Object> {
         String str = String.format("Checkout says that I see the  purchase items items have shipped on %s via %s",
                 msg.getShipDate(),
                 msg.getShipper());
-        System.out.println(str);
+        logger.info(str);
 
         return this;
     }
@@ -60,7 +63,7 @@ public class CheckOutActor extends AbstractBehavior<Object> {
                 creditCard.getCreditCardNumber(),
                 new Date()
                 );
-        System.out.println(str);
+        logger.info(str);
         // Now pay
         double amount = 0;
         for(PurchaseItem item : msg.getPurchaseItems()){
@@ -78,7 +81,7 @@ public class CheckOutActor extends AbstractBehavior<Object> {
                 msg.getPaymentId(),
                 msg.getPaymentDate()
         );
-        System.out.println(str);
+        logger.info(str);
         // Now ship the item
         ShipperActor.ShipmentInfo shipment = new ShipperActor.ShipmentInfo("FedEX", msg.getPurchaseItems());
         ActorSystem<Object> shipperActor = ActorSystem.create(ShipperActor.create(), "shipperActor");

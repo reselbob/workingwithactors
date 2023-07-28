@@ -7,12 +7,15 @@ import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 import msg.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.UUID;
 import java.util.Vector;
 
 public class PaymentActor extends AbstractBehavior<Object> {
+    Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
 
     private PaymentActor(ActorContext<Object> context) {
         super(context);
@@ -46,7 +49,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
                 new Date(),
                 amount
         );
-        System.out.println(str);
+        logger.info(str);
        // send a receipt to the Customer
         PaymentActor.PaymentReceipt paymentReceipt = new PaymentActor.PaymentReceipt(msg.customer,new Date(), msg.creditCard.getCreditCardNumber(),amount);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");

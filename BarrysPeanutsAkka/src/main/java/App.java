@@ -3,13 +3,16 @@ import akka.actor.typed.ActorSystem;
 import msg.Address;
 import msg.Customer;
 import msg.PurchaseItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeoutException;
 
 
 public class App {
     public static void main(String[] args) throws InterruptedException, TimeoutException {
-        System.out.println("Starting Barry's Gourmet Peanuts");
+        Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
+        logger.info("Starting Barry's Gourmet Peanuts");
         Customer customer = helper.MockHelper.getCustomer();
         Address address = helper.MockHelper.getAddress();
 

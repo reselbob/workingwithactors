@@ -10,11 +10,14 @@ import helper.MockHelper;
 import msg.CreditCard;
 import msg.Customer;
 import msg.PurchaseItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Date;
 import java.util.Vector;
 
 public class CustomerActor extends AbstractBehavior<Object> {
-
+    Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
     private CustomerActor(ActorContext<Object> context) {
         super(context);
     }
@@ -44,7 +47,7 @@ public class CustomerActor extends AbstractBehavior<Object> {
                 msg.getPaymentDate(),
                 msg.getCreditCardNumber(),
                 msg.getAmount());
-        System.out.println(str);
+        logger.info(str);
         return this;
     }
 
@@ -65,7 +68,7 @@ public class CustomerActor extends AbstractBehavior<Object> {
                 firstName,
                 lastName,
                 shipper);
-        System.out.println(str);
+        logger.info(str);
         return this;
     }
 

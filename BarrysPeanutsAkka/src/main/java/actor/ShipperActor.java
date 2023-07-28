@@ -7,12 +7,15 @@ import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 import msg.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.UUID;
 import java.util.Vector;
 
 public class ShipperActor extends AbstractBehavior<Object> {
+    Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
 
     private ShipperActor(ActorContext<Object> context) {
         super(context);
@@ -43,7 +46,7 @@ public class ShipperActor extends AbstractBehavior<Object> {
                 msg.getShipper(),
                 shipDate);
 
-        System.out.println(str);
+        logger.info(str);
         // Send a shipping receipt back toa the Customer
         ShipperActor.ShippingReceipt shippingReceipt = new ShipperActor.ShippingReceipt(msg.getShipper(), msg.getPurchaseItems(),shipDate);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");

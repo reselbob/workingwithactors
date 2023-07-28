@@ -14,11 +14,14 @@ import java.util.Vector;
 
 import akka.util.Timeout;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import scala.concurrent.Await;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
 
 public class ShoppingCartActor extends AbstractBehavior<Object> {
+    Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
 
     private ShoppingCartActor(ActorContext<Object> context) {
         super(context);
@@ -57,14 +60,14 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
 
     private Behavior<Object> handleEmptyCart(EmptyCart msg) {
         String str = String.format("ShoppingCart is emptying the cart of %s items a checkout at %s. \n ", this.purchaseItems.toArray().length, new Date());
-        System.out.println(str);
+        logger.info(str);
         this.purchaseItems = new Vector<PurchaseItem>();
         return this;
     }
 
     private Behavior<Object> handleCheckoutCart(CheckoutCart msg) {
         String str = String.format("ShoppingCart is starting a checkout of %s items a checkout at %s. \n", this.purchaseItems.toArray().length, new Date());
-        System.out.println(str);
+        logger.info(str);
         ActorRef<Object> checkoutActor = ActorSystem.create(CheckOutActor.create(), "checkoutActor");
         CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.purchaseItems);
         checkoutActor.tell(startCheckout);
