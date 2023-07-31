@@ -62,7 +62,6 @@ public class BarrysPeanutsExecutor {
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
 
-            //wf.wait(10);
             try {
                 wf.checkOut(String.format("Workflow ID [%s] is checking out", WORKFLOW_ID));
             } catch (Exception e) {
@@ -71,8 +70,6 @@ public class BarrysPeanutsExecutor {
                 throw new RuntimeException(e);
             }
 
-            //wf.wait(10);
-
             try {
                 wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
             } catch (Exception e) {
@@ -80,8 +77,6 @@ public class BarrysPeanutsExecutor {
                 //TODO Provide compensation behavior, but for now, just error
                 throw new RuntimeException(e);
             }
-
-            //wf.wait(10);
 
             try {
                 wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
