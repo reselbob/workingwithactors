@@ -38,14 +38,13 @@ public class CheckOutActor extends AbstractBehavior<Object> {
     }
 
     private Behavior<Object> handleStartCheckout(StartCheckout msg) {
-        /* get the credit card number from the customer
-        CustomerActor.CreditCardRequest creditCardRequest = new CustomerActor.CreditCardRequest(msg.getPurchaseItems());
-        ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");
-        customerActor.ask(creditCardRequest);*/
+        String str = String.format("%s is Checking Out a purchase and preparing a payment", CheckOutActor.class);
+        logger.info(str);
         PaymentActor.PaymentInfo paymentInfo = new PaymentActor.PaymentInfo(msg.getCustomer(),
                 msg.getCreditCard(),
                 msg.getPurchaseItems());
         ActorSystem<Object> paymentActor = ActorSystem.create(PaymentActor.create(), "paymentActor");
+        // send payment to the PaymentActor
         paymentActor.tell(paymentInfo);
         return this;
     }

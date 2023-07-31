@@ -3,12 +3,14 @@ package barryspeanuts;
 import barryspeanuts.mock.mockHelper;
 import barryspeanuts.model.PurchaseItem;
 import io.temporal.client.*;
+import io.temporal.common.RetryOptions;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.worker.Worker;
 import io.temporal.worker.WorkerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -47,7 +49,16 @@ public class BarrysPeanutsExecutor {
         logger.info("Worker started for task queue: " + TASK_QUEUE);
 
         // now we can start running instances of our workflow - its state will be persisted
-        WorkflowOptions options = WorkflowOptions.newBuilder().setTaskQueue(TASK_QUEUE).setWorkflowId(WORKFLOW_ID).build();
+        WorkflowOptions options = WorkflowOptions.newBuilder()
+                .setTaskQueue(TASK_QUEUE).setWorkflowId(WORKFLOW_ID)
+                // set the return options
+                .setRetryOptions(RetryOptions.newBuilder()
+                        .setInitialInterval(Duration.ofSeconds(1))
+                        .setMaximumInterval(Duration.ofSeconds(10))
+                        .build())
+                .build();
+
+
         ShoppingCartWorkflow wf = client.newWorkflowStub(ShoppingCartWorkflow.class, options);
         try {
 

@@ -55,6 +55,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
         PaymentActor.PaymentReceipt paymentReceipt = new PaymentActor.PaymentReceipt(msg.customer,new Date(), msg.creditCard.getCreditCardNumber(),amount);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");
         customerActor.tell(paymentReceipt);
+        // and ship the purchase
         ActorSystem<Object> shipperActor = ActorSystem.create(ShipperActor.create(), "shipperActor");
         ShipperActor.ShipmentInfo shipmentInfo = new ShipperActor.ShipmentInfo(helper.MockHelper.getShipper(),
                 msg.getPurchaseItems());
