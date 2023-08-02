@@ -34,6 +34,8 @@ Confirm that Maven is installed:
 mvn --version
 ```
 
+You'll get output similar to the following:
+
 ```bash
 Maven home: /usr/share/maven
 Java version: 18.0.2, vendor: Oracle Corporation, runtime: /usr/lib/jvm/jdk-18.0.2
