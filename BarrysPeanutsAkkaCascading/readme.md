@@ -46,5 +46,5 @@ OS name: "linux", version: "5.19.0-46-generic", arch: "amd64", family: "unix"
 ## (2) Start the application
 
 ```
-mvn exec:java -Dexec.mainClass="App"
+TO BE PROVIDED
 ```
