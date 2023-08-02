@@ -7,3 +7,11 @@ Figure 1 below illustrates an example of implementing the Barry Peanuts Shopping
 | ![Cascading Style](./images/sequential-control-flow.jpg) |
 |----------------------------------------------------------|
 | Figure 1: The cascading style of the Actor Model         |
+
+# Running the code:
+
+The [Java Virtual Machine](https://openjdk.org/) and [Maven](https://maven.apache.org/install.html) need to be installed on the host computer.
+
+## (1) Download the Temporal CLI (which includes the server)
+
+## (2) Start the application

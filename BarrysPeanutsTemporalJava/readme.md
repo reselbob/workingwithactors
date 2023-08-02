@@ -1,7 +1,24 @@
-# Under Construction
+# Implementing the flattened style of the Actor Model under Temporal
+
+This project is an implementation of the flattened style of Actor Model under Temporal.
+
+Temporal supports for the Actor Model out of the box. Intrinsic to the Temporal framework are the Temporal Server and Worker.
+
+
+You can think of the Temporal Server as a repository for storing information about the state of the workflow
+as well as being the message broker that manages messages relevant to the given workflow’s operation.
+The Worker is the component that receives messages and then executes behavior defined in the workflow according to the message received.
+Applications, by way of another Temporal component called a Client send signals to a Temporal workflow. (Remember, under Temporal, a message is called a signal.)
+The Temporal workflow then responds to the signal received. (See Figure 1.)
+
+| ![Temporal Architecture](./images/temp-arch-01.jpg)                  |
+|----------------------------------------------------------------------|
+| Figure 1: The Temporal architecture for implementing the Actor Model |
 
 
 # Running the code:
+
+The [Java Virtual Machine](https://openjdk.org/) and [Maven](https://maven.apache.org/install.html) need to be installed on the host computer.
 
 ## (1) Download the Temporal CLI (which includes the server)
 

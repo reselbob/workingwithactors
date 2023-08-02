@@ -14,3 +14,11 @@ After payment completes, the ShoppingCart sends a message to the Shipper actor t
 |Figure 1: The flat actor-controller implementation|
 
 One benefit of the flat style is the ease of implementation as well as ease of maintenance.
+
+# Running the code:
+
+The [Java Virtual Machine](https://openjdk.org/) and [Maven](https://maven.apache.org/install.html) need to be installed on the host computer.
+
+## (1) Download the Temporal CLI (which includes the server)
+
+## (2) Start the application
