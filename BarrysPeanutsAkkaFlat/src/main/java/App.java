@@ -17,7 +17,8 @@ import java.util.concurrent.TimeoutException;
 public class App {
     public static void main(String[] args) throws InterruptedException, TimeoutException {
         Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
-        logger.info("Starting Barry's Gourmet Peanuts");
+        String str = String.format("%s is starting Barry's Gourmet Peanuts",App.class);
+        logger.info(str);
 
         Customer customer = helper.MockHelper.getCustomer();
         Address address = helper.MockHelper.getAddress();

@@ -20,7 +20,36 @@ The Temporal workflow then responds to the signal received. (See Figure 1.)
 
 The [Java Virtual Machine](https://openjdk.org/) and [Maven](https://maven.apache.org/install.html) need to be installed on the host computer.
 
-## (1) Download the Temporal CLI (which includes the server)
+## (1) Confirm that Java and Maven are installed on the host machine
+
+Confirm that Java is installed:
+
+```bash
+java --version
+```
+
+You'll get output similar to the following:
+
+```bash
+openjdk 18.0.2-ea 2022-07-19
+OpenJDK Runtime Environment (build 18.0.2-ea+9-Ubuntu-222.04)
+OpenJDK 64-Bit Server VM (build 18.0.2-ea+9-Ubuntu-222.04, mixed mode, sharing)
+```
+
+Confirm that Maven is installed:
+
+```bash
+mvn --version
+```
+
+```bash
+Maven home: /usr/share/maven
+Java version: 18.0.2, vendor: Oracle Corporation, runtime: /usr/lib/jvm/jdk-18.0.2
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "5.19.0-46-generic", arch: "amd64", family: "unix"
+```
+
+## (2) Download the Temporal CLI (which includes the server)
 
 If you do not have the Temporal server up and running already, run the following command: 
 
@@ -28,7 +57,7 @@ If you do not have the Temporal server up and running already, run the following
 
 ---
 
-## (2) Start the Temporal Server
+## (3) Start the Temporal Server
 
 Here is the command for starting the Temporal Server on a local Ubuntu machine. Execute the command in a terminal window.
 
@@ -38,7 +67,7 @@ Here is the command for starting the Temporal Server on a local Ubuntu machine. 
 ---
 
 
-## (3) Start the application
+## (4) Start the application
 
 In yet another separate terminal window run:
 
