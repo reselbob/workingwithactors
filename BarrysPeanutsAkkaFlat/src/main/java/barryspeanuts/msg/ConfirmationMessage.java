@@ -1,4 +1,4 @@
-package msg;
+package barryspeanuts.msg;
 
 
 import akka.actor.typed.ActorRef;

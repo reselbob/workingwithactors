@@ -1,7 +1,7 @@
-package helper;
-import msg.Address;
-import msg.CreditCard;
-import msg.Customer;
+package barryspeanuts.helper;
+import barryspeanuts.msg.Address;
+import barryspeanuts.msg.CreditCard;
+import barryspeanuts.msg.Customer;
 
 public  class MockHelper {
 

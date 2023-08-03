@@ -1,16 +1,17 @@
-import actor.PaymentActor;
-import actor.ShipperActor;
-import actor.ShoppingCartActor;
+package barryspeanuts;
+import barryspeanuts.actor.PaymentActor;
+import barryspeanuts.actor.ShipperActor;
+import barryspeanuts.actor.ShoppingCartActor;
 import akka.actor.typed.ActorSystem;
-import msg.Address;
-import msg.CreditCard;
-import msg.Customer;
-import msg.PurchaseItem;
+import barryspeanuts.helper.MockHelper;
+import barryspeanuts.msg.Address;
+import barryspeanuts.msg.CreditCard;
+import barryspeanuts.msg.Customer;
+import barryspeanuts.msg.PurchaseItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.concurrent.TimeoutException;
 
 
@@ -20,8 +21,8 @@ public class App {
         String str = String.format("%s is starting Barry's Gourmet Peanuts",App.class);
         logger.info(str);
 
-        Customer customer = helper.MockHelper.getCustomer();
-        Address address = helper.MockHelper.getAddress();
+        Customer customer = MockHelper.getCustomer();
+        Address address = MockHelper.getAddress();
 
         ArrayList<PurchaseItem> purchaseItems = new ArrayList<>();
         PurchaseItem purchase = new PurchaseItem(customer, "Barry's Gourmet Peanuts", 5, 1, 10.99, address, address);
@@ -45,13 +46,13 @@ public class App {
         // Pay
         String firstName = customer.getFirstName();
         String lastName = customer.getLastName();
-        CreditCard creditCard = helper.MockHelper.getCreditCard(firstName, lastName);
+        CreditCard creditCard = MockHelper.getCreditCard(firstName, lastName);
         double totalAmount = purchaseItems.stream().mapToDouble(PurchaseItem::getTotal).sum();
         PaymentActor.PaymentInfo paymentInfo = new PaymentActor.PaymentInfo(customer, creditCard, totalAmount);
         shoppingCartActor.tell(paymentInfo);
 
         // Ship
-        ShipperActor.ShipmentInfo shipmentInfo = new ShipperActor.ShipmentInfo(helper.MockHelper.getShipper(), purchaseItems);
+        ShipperActor.ShipmentInfo shipmentInfo = new ShipperActor.ShipmentInfo(MockHelper.getShipper(), purchaseItems);
         shoppingCartActor.tell(shipmentInfo);
 
         // Empty Cart

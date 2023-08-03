@@ -1,4 +1,4 @@
-package actor;
+package barryspeanuts.actor;
 
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.ActorSystem;
@@ -8,13 +8,17 @@ import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 
+import barryspeanuts.helper.MockHelper;
+import barryspeanuts.msg.ConfirmationMessage;
+import barryspeanuts.msg.CreditCard;
+import barryspeanuts.msg.Customer;
+import barryspeanuts.msg.PurchaseItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import msg.*;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
+
 public class ShoppingCartActor extends AbstractBehavior<Object> {
 
     private static final Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
@@ -74,7 +78,7 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         Customer customer = this.purchaseItems.get(0).getCustomer();
         String firstName = customer.getFirstName();
         String lastName = customer.getLastName();
-        CreditCard creditCard = helper.MockHelper.getCreditCard(firstName, lastName);
+        CreditCard creditCard = MockHelper.getCreditCard(firstName, lastName);
         PaymentActor.PaymentInfo paymentInfo = new PaymentActor.PaymentInfo(customer, creditCard, msg.getPaymentAmount());
         paymentActor.tell(paymentInfo);
         return this;
@@ -83,7 +87,7 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
     private Behavior<Object> handleShipping(ShipperActor.ShipmentInfo msg) {
         // Tell the Shipper to ship
         ActorRef<Object> shipperActor = ActorSystem.create(ShipperActor.create(), "shipperActor");
-        String shipper = helper.MockHelper.getShipper();
+        String shipper = MockHelper.getShipper();
         ShipperActor.ShipmentInfo shippingInfo = new ShipperActor.ShipmentInfo(shipper, this.purchaseItems);
         shipperActor.tell(shippingInfo);
         return this;

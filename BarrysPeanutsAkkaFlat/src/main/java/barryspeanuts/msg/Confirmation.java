@@ -1,4 +1,4 @@
-package msg;
+package barryspeanuts.msg;
 
 public class Confirmation {
     final String confirmationMsg;

@@ -1,19 +1,15 @@
-package actor;
+package barryspeanuts.actor;
 
-import akka.actor.typed.ActorSystem;
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import msg.*;
+import barryspeanuts.msg.PurchaseItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.UUID;
-import java.util.Vector;
 
 public class CheckOutActor extends AbstractBehavior<Object> {
     private static final Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
