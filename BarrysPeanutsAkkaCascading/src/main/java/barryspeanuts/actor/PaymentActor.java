@@ -1,4 +1,4 @@
-package actor;
+package barryspeanuts.actor;
 
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.Behavior;
@@ -6,7 +6,10 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import msg.*;
+import barryspeanuts.helper.MockHelper;
+import barryspeanuts.msg.CreditCard;
+import barryspeanuts.msg.Customer;
+import barryspeanuts.msg.PurchaseItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +60,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
         customerActor.tell(paymentReceipt);
         // and ship the purchase
         ActorSystem<Object> shipperActor = ActorSystem.create(ShipperActor.create(), "shipperActor");
-        ShipperActor.ShipmentInfo shipmentInfo = new ShipperActor.ShipmentInfo(helper.MockHelper.getShipper(),
+        ShipperActor.ShipmentInfo shipmentInfo = new ShipperActor.ShipmentInfo(MockHelper.getShipper(),
                 msg.getPurchaseItems());
         shipperActor.tell(shipmentInfo);
         return this;

@@ -1,4 +1,4 @@
-package actor;
+package barryspeanuts.actor;
 
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.ActorSystem;
@@ -7,12 +7,15 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import msg.*;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 
+import barryspeanuts.msg.CreditCard;
+import barryspeanuts.msg.Customer;
+import barryspeanuts.msg.PurchaseItem;
+import barryspeanuts.helper.MockHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +61,7 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
     private Behavior<Object> handleEmptyCart(EmptyCart msg) {
         String str = String.format("ShoppingCart is emptying the cart of %s items a checkout at %s. \n ", this.purchaseItems.toArray().length, new Date());
         logger.info(str);
-        this.purchaseItems = new ArrayList<PurchaseItem>();
+        this.purchaseItems = new ArrayList<>();
         return this;
     }
 
@@ -67,8 +70,9 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         logger.info(str);
         ActorRef<Object> checkoutActor = ActorSystem.create(CheckOutActor.create(), "checkoutActor");
         Customer customer = this.purchaseItems.get(0).getCustomer();
-        CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.purchaseItems,
-                helper.MockHelper.getCreditCard(customer.getFirstName(), customer.getLastName()), customer);
+        CreditCard creditCard = MockHelper.getCreditCard(customer.getFirstName(), customer.getLastName());
+        CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.purchaseItems,creditCard,customer);
+
         checkoutActor.tell(startCheckout);
         return this;
     }

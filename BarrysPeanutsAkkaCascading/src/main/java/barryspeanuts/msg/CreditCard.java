@@ -1,4 +1,4 @@
-package msg;
+package barryspeanuts.msg;
 public class CreditCard {
     public CreditCard(String nameOnCard, String creditCardNumber, Integer expirationMonth, Integer expirationYear, Integer securityCode) {
         this.nameOnCard = nameOnCard;

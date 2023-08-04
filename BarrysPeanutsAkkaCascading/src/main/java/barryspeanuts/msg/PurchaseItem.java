@@ -1,4 +1,4 @@
-package msg;
+package barryspeanuts.msg;
 
 import java.util.UUID;
 import java.util.Date;

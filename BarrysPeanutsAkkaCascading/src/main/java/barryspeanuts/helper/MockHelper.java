@@ -1,11 +1,12 @@
-package helper;
-import msg.Address;
-import msg.CreditCard;
-import msg.Customer;
+package barryspeanuts.helper;
+
+import barryspeanuts.msg.Address;
+import barryspeanuts.msg.CreditCard;
+import barryspeanuts.msg.Customer;
 
 public  class MockHelper {
 
-    static public CreditCard  getCreditCard(String firstName, String lastName){
+    static public CreditCard getCreditCard(String firstName, String lastName){
         return new CreditCard(firstName + " " + lastName,
                 "1111222233334444",8, 26,111 );
     };

@@ -1,4 +1,4 @@
-package actor;
+package barryspeanuts.actor;
 
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.Behavior;
@@ -6,7 +6,7 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import msg.*;
+import barryspeanuts.msg.PurchaseItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
