@@ -75,7 +75,7 @@
                     <arguments>
                         <argument>-classpath</argument>
                         <classpath />
-                        <argument>com.example.AkkaQuickstart</argument>
+                        <argument>barryspeanuts.App</argument>
                     </arguments>
                 </configuration>
             </plugin>
