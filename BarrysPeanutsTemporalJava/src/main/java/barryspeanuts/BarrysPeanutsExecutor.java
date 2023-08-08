@@ -47,7 +47,7 @@ public class BarrysPeanutsExecutor {
 
         // Start all workers created by this factory.
         factory.start();
-        logger.info("Worker started for task queue: " + TASK_QUEUE);
+        logger.info("Worker started for task queue: {} with WorkflowID : {}",TASK_QUEUE, WORKFLOW_ID);
 
         // now we can start running instances of our workflow - its state will be persisted
         WorkflowOptions options = WorkflowOptions.newBuilder()
@@ -64,18 +64,14 @@ public class BarrysPeanutsExecutor {
         try {
 
             PurchaseItem purchaseItem = mockHelper.getPurchaseItem();
-
-            BatchRequest signalWithStartReq = client.newSignalWithStartRequest();
-            signalWithStartReq.add(wf::startWorkflow);
-            signalWithStartReq.add(wf::addItem, purchaseItem);
-            client.signalWithStart(signalWithStartReq);
-
+            WorkflowClient.start(wf::startWorkflow);
+            wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
 
             try {
-                wf.checkOut(String.format("Workflow ID [%s] is checking out", WORKFLOW_ID));
+                wf.checkOut(String.format("Workflow ID {} is checking out", WORKFLOW_ID));
             } catch (Exception e) {
                 logger.error(e.getMessage());
                 //TODO Provide compensation behavior, but for now, just error
