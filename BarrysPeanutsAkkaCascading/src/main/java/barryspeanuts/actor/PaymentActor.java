@@ -47,13 +47,11 @@ public class PaymentActor extends AbstractBehavior<Object> {
             amount = amount + item.getTotal();
         }
         // Now pay
-        String str = String.format("Paying with Credit Card for %s with Credit Card Number %s on %s for the amount of %s\n",
+        logger.info("Paying with Credit Card for {} with Credit Card Number {} on {} for the amount of {}\n",
                 creditCard.getNameOnCard(),
                 creditCard.getCreditCardNumber(),
                 new Date(),
-                amount
-        );
-        logger.info(str);
+                amount);
        // send a receipt to the Customer
         PaymentActor.PaymentReceipt paymentReceipt = new PaymentActor.PaymentReceipt(msg.customer,new Date(), msg.creditCard.getCreditCardNumber(),amount);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");

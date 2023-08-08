@@ -99,15 +99,13 @@ public class BarrysPeanutsExecutor {
             }
 
             List<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
-            String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
-            logger.info(str);
+            logger.info("The count of purchase items  is {}", purchaseItems.toArray().length);
 
             wf.emptyCart(String.format("Workflow ID [%s] is emptying cart", WORKFLOW_ID));
 
             purchaseItems = wf.queryPurchaseItems();
 
-            str = String.format("the count of purchase items  after the cart is emptied is %s", purchaseItems.toArray().length);
-            logger.info(str);
+            logger.info("The count of purchase items  after the cart is emptied is {}", purchaseItems.toArray().length);
 
         } catch (WorkflowException e) {
             // Expected

@@ -14,22 +14,19 @@ public class ShoppingActivitiesImpl implements ShoppingCartActivities {
 
     @Override
     public CheckOutReceipt checkOut(List<PurchaseItem> purchaseItems) {
-        String str = String.format("%s :  is checking out", ShoppingActivitiesImpl.class);
-        logger.info(str);
+        logger.info("{} is checking out", ShoppingActivitiesImpl.class);
         Purchase purchase = new Purchase(purchaseItems, new Date());
         return new CheckOutReceipt(purchase, new Date());
     }
 
     public PaymentReceipt pay(Purchase purchase, CreditCard creditCard) {
-        String str = String.format("%s :  is paying", ShoppingActivitiesImpl.class);
-        logger.info(str);
+        logger.info("{} is paying", ShoppingActivitiesImpl.class);
         UUID transactionId = UUID.randomUUID();
         return new PaymentReceipt(purchase,new Date(), creditCard,transactionId);
     }
 
     public ShippingReceipt ship(Purchase purchase, String shipper) {
-        String str = String.format("%s :  is shipping to %s", ShoppingActivitiesImpl.class, shipper);
-        logger.info(str);
+        logger.info("{} is shipping to {}", ShoppingActivitiesImpl.class, shipper);
         return new ShippingReceipt(purchase, shipper);
     }
 }

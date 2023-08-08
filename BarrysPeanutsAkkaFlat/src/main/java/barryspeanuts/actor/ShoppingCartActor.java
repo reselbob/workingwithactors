@@ -66,8 +66,7 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
 
 
     private Behavior<Object> handleEmptyCart(EmptyCart msg) throws InterruptedException {
-        String str = String.format("ShoppingCart is emptying the cart of %s items a checkout at %s. \n ", this.purchaseItems.toArray().length, new Date());
-        logger.info(str);
+        logger.info("ShoppingCart is emptying the cart of {} items a checkout at {}. \n ", this.purchaseItems.toArray().length, new Date());
         this.purchaseItems = new ArrayList<PurchaseItem>();
         return this;
     }
@@ -95,8 +94,7 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
 
     private Behavior<Object> handleCheckoutCart(CheckoutCart msg) {
 
-        String str = String.format("%s is starting a checkout of %s items a checkout at %s. \n", ShoppingCartActor.class, this.purchaseItems.toArray().length, new Date());
-        logger.info(str);
+        logger.info("{} is starting a checkout of {} items a checkout at {}. \n", ShoppingCartActor.class, this.purchaseItems.toArray().length, new Date());
 
         // Tell the CheckOut Actor to check out
         ActorRef<Object> checkoutActor = ActorSystem.create(CheckOutActor.create(), "checkoutActor");

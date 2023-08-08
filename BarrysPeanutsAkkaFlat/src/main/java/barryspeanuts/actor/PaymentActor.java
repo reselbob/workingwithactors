@@ -42,14 +42,12 @@ public class PaymentActor extends AbstractBehavior<Object> {
 
         double amount = msg.getPaymentAmount();
         // Now pay
-        String str = String.format("%s is Paying with Credit Card for %s with Credit Card Number %s on %s for the amount of %s\n",
+        logger.info("{} is Paying with Credit Card for {} with Credit Card Number {} on {} for the amount of {}\n",
                 PaymentActor.class,
                 creditCard.getNameOnCard(),
                 creditCard.getCreditCardNumber(),
                 new Date(),
-                amount
-        );
-        logger.info(str);
+                amount);
         return this;
     }
 

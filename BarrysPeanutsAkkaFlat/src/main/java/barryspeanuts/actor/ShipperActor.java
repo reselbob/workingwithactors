@@ -40,15 +40,11 @@ public class ShipperActor extends AbstractBehavior<Object> {
 
     private Behavior<Object> handleShipment(ShipmentInfo msg) {
         // Now ship
-
         Date shipDate = new Date();
-
-        String str = String.format("%s is Shipping the purchase using Shipper: %s on %s.\n",
+        logger.info("{} is Shipping the purchase using Shipper: {} on {}.\n",
                 ShipperActor.class,
                 msg.getShipper(),
                 shipDate);
-
-        logger.info(str);
         return this;
     }
 
