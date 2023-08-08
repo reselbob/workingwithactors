@@ -23,10 +23,9 @@ public class PayTaskImpl implements WorkflowTask {
     @Override
     public void process(ShoppingCartWorkflow shoppingCartWorkflow) {
         ShoppingCartActivities activities = shoppingCartWorkflow.queryActivities();
-        CreditCard creditCard = mockHelper.getCreditCard(this.purchase.getPurchaseItems().firstElement().getCustomer().getFirstName(),
-                this.purchase.getPurchaseItems().firstElement().getCustomer().getLastName());
-        String str = String.format("%s is Paying on CreditCard for %s", PayTaskImpl.class, creditCard.getFullName());
-        logger.info(str);
+        CreditCard creditCard = mockHelper.getCreditCard(this.purchase.getPurchaseItems().get(0).getCustomer().getFirstName(),
+                this.purchase.getPurchaseItems().get(0).getCustomer().getLastName());
+        logger.info("{}is Paying on CreditCard for {}", PayTaskImpl.class, creditCard.getFullName());
 
         activities.pay(this.purchase,creditCard);
     }

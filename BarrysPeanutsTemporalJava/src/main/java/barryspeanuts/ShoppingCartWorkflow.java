@@ -4,6 +4,8 @@ import io.temporal.workflow.QueryMethod;
 import io.temporal.workflow.SignalMethod;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
+
+import java.util.List;
 import java.util.Vector;
 
 @WorkflowInterface
@@ -14,7 +16,7 @@ public interface ShoppingCartWorkflow {
     @QueryMethod
     ShoppingCartActivities queryActivities();
     @QueryMethod
-    Vector<PurchaseItem> queryPurchaseItems();
+    List<PurchaseItem> queryPurchaseItems();
 
     @SignalMethod
     void addItem(PurchaseItem purchaseItem);

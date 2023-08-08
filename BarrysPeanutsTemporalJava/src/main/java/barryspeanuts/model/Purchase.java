@@ -1,18 +1,16 @@
 package barryspeanuts.model;
 
 import java.util.Date;
-import java.util.UUID;
-import java.util.Vector;
-
+import java.util.List;
 public class Purchase {
 
     public Purchase(){}
-    public Purchase(Vector<PurchaseItem> purchaseItems, Date purchaseDate) {
+    public Purchase(List<PurchaseItem> purchaseItems, Date purchaseDate) {
         this.purchaseItems = purchaseItems;
         this.purchaseDate = purchaseDate;
     }
 
-    public Vector<PurchaseItem> getPurchaseItems() {
+    public List<PurchaseItem> getPurchaseItems() {
         return purchaseItems;
     }
 
@@ -22,6 +20,6 @@ public class Purchase {
     }
 
     String id;
-    Vector<PurchaseItem> purchaseItems;
+    List<PurchaseItem> purchaseItems;
     Date purchaseDate;
 }

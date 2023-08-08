@@ -34,8 +34,7 @@ public class CheckOutActor extends AbstractBehavior<Object> {
     }
 
     private Behavior<Object> handleStartCheckout(StartCheckout msg) {
-        String str = String.format("%s has has started Checkout\n", CheckOutActor.class);
-        logger.info(str);
+        logger.info("{} has has started Checkout\n", CheckOutActor.class);
         return this;
     }
 

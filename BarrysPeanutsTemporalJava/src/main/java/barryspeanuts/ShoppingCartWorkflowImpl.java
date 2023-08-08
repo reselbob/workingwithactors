@@ -2,14 +2,13 @@ package barryspeanuts;
 
 import barryspeanuts.model.Purchase;
 import barryspeanuts.task.*;
-import io.temporal.activity.ActivityCancellationType;
-import io.temporal.activity.ActivityOptions;
 import io.temporal.workflow.WorkflowQueue;
 import io.temporal.workflow.Workflow;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
 
 import barryspeanuts.model.PurchaseItem;
 import org.slf4j.Logger;
@@ -44,14 +43,14 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     }
 
     @Override
-    public Vector<PurchaseItem> queryPurchaseItems() {
+    public List<PurchaseItem> queryPurchaseItems() {
         return this.purchaseItems;
     }
 
     @Override
     public void addItem(PurchaseItem purchaseItem) {
         if (this.purchaseItems == null) {
-            this.purchaseItems = new Vector<>();
+            this.purchaseItems = new ArrayList<>();
         }
         this.purchaseItems.add(purchaseItem);
     }
@@ -64,7 +63,7 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     }
 
     public void clearItems() {
-        this.purchaseItems = new Vector<>();
+        this.purchaseItems = new ArrayList<>();
     }
 
     @Override
@@ -84,15 +83,15 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
 
     @Override
     public void emptyCart(String message) {
-        this.purchaseItems = new Vector<>();
+        this.purchaseItems = new ArrayList<>();
     }
 
     Purchase getPurchase() {
-        Vector<PurchaseItem> items = queryPurchaseItems();
+        List<PurchaseItem> items = queryPurchaseItems();
         return new Purchase(items, new Date());
 
     }
 
-    Vector<PurchaseItem> purchaseItems;
+    List<PurchaseItem> purchaseItems;
 
 }

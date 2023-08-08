@@ -11,8 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
-import java.util.Vector;
+
 
 public class BarrysPeanutsExecutor {
 
@@ -97,16 +98,14 @@ public class BarrysPeanutsExecutor {
                 throw new RuntimeException(e);
             }
 
-            Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
-            String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
-            logger.info(str);
+            List<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
+            logger.info("The count of purchase items  is {}", purchaseItems.toArray().length);
 
             wf.emptyCart(String.format("Workflow ID [%s] is emptying cart", WORKFLOW_ID));
 
             purchaseItems = wf.queryPurchaseItems();
 
-            str = String.format("the count of purchase items  after the cart is emptied is %s", purchaseItems.toArray().length);
-            logger.info(str);
+            logger.info("The count of purchase items  after the cart is emptied is {}", purchaseItems.toArray().length);
 
         } catch (WorkflowException e) {
             // Expected

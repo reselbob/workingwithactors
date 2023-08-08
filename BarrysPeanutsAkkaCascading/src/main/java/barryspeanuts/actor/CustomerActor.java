@@ -35,13 +35,12 @@ public class CustomerActor extends AbstractBehavior<Object> {
 
     private Behavior<Object> handlePaymentReceipt(PaymentActor.PaymentReceipt msg) {
         String fullName = String.format("%s %s", msg.getCustomer().getFirstName(), msg.getCustomer().getLastName());
-        String str = String.format("Customer %s processed PaymentInfo Receipt with ID: %s on %s with CC Number: %s for the amount of: %s",
+        logger.info("Customer {} processed PaymentInfo Receipt with ID: {} on {} with CC Number: {} for the amount of: {}",
                 fullName,
                 msg.getId(),
                 msg.getPaymentDate(),
                 msg.getCreditCardNumber(),
                 msg.getAmount());
-        logger.info(str);
         return this;
     }
 
@@ -57,12 +56,11 @@ public class CustomerActor extends AbstractBehavior<Object> {
             lastName = item.getCustomer().getLastName();
             item.setShipDate(shipDate);
         }
-        String str = String.format("Shipped %s purchases to %s %s using %s. \n",
+        logger.info("Shipped {} purchases to {} {} using {}. \n",
                 items.toArray().length,
                 firstName,
                 lastName,
                 shipper);
-        logger.info(str);
         return this;
     }
 

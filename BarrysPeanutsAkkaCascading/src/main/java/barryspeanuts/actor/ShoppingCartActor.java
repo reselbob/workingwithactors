@@ -59,15 +59,13 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
 
 
     private Behavior<Object> handleEmptyCart(EmptyCart msg) {
-        String str = String.format("ShoppingCart is emptying the cart of %s items a checkout at %s. \n ", this.purchaseItems.toArray().length, new Date());
-        logger.info(str);
+        logger.info("ShoppingCart is emptying the cart of {} items a checkout at {}. \n ", this.purchaseItems.toArray().length, new Date());
         this.purchaseItems = new ArrayList<>();
         return this;
     }
 
     private Behavior<Object> handleCheckoutCart(CheckoutCart msg) {
-        String str = String.format("ShoppingCart is starting a checkout of %s items a checkout at %s. \n", this.purchaseItems.toArray().length, new Date());
-        logger.info(str);
+        logger.info("ShoppingCart is starting a checkout of {} items a checkout at {}. \n", this.purchaseItems.toArray().length, new Date());
         ActorRef<Object> checkoutActor = ActorSystem.create(CheckOutActor.create(), "checkoutActor");
         Customer customer = this.purchaseItems.get(0).getCustomer();
         CreditCard creditCard = MockHelper.getCreditCard(customer.getFirstName(), customer.getLastName());
