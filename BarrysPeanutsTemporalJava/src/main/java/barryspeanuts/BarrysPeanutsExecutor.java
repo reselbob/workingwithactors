@@ -11,8 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
-import java.util.Vector;
+
 
 public class BarrysPeanutsExecutor {
 
@@ -97,7 +98,7 @@ public class BarrysPeanutsExecutor {
                 throw new RuntimeException(e);
             }
 
-            Vector<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
+            List<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
             String str = String.format("the count of purchase items  is %s", purchaseItems.toArray().length);
             logger.info(str);
 

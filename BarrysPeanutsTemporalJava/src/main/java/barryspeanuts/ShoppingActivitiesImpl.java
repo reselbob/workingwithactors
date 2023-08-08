@@ -1,7 +1,8 @@
 package barryspeanuts;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
-import java.util.Vector;
+
 
 import barryspeanuts.model.*;
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ public class ShoppingActivitiesImpl implements ShoppingCartActivities {
     private static final Logger logger = LoggerFactory.getLogger(ShoppingActivitiesImpl.class);
 
     @Override
-    public CheckOutReceipt checkOut(Vector<PurchaseItem> purchaseItems) {
+    public CheckOutReceipt checkOut(List<PurchaseItem> purchaseItems) {
         String str = String.format("%s :  is checking out", ShoppingActivitiesImpl.class);
         logger.info(str);
         Purchase purchase = new Purchase(purchaseItems, new Date());
