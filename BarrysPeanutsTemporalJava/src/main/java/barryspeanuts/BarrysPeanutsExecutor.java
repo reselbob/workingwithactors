@@ -65,46 +65,40 @@ public class BarrysPeanutsExecutor {
 
             PurchaseItem purchaseItem = mockHelper.getPurchaseItem();
             WorkflowClient.start(wf::startWorkflow);
+            // Add some purchase items to the workflow for processing
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
             wf.addItem(purchaseItem);
 
-            try {
-                wf.checkOut(String.format("Workflow ID {} is checking out", WORKFLOW_ID));
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-                //TODO Provide compensation behavior, but for now, just error
-                throw new RuntimeException(e);
-            }
+            // Checkout
+            wf.checkOut(String.format("Workflow ID [%s] is checking out", WORKFLOW_ID));
+            // TODO Use the Temporal Saga Library
+            //  (https://www.javadoc.io/static/io.temporal/temporal-sdk/1.0.0/io/temporal/workflow/Saga.html)
+            //  to create a compensation if something goes wrong with Checkout
 
-            try {
-                wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-                //TODO Provide compensation behavior, but for now, just error
-                throw new RuntimeException(e);
-            }
+            // Pay
+            wf.pay(String.format("Workflow ID [%s] is paying", WORKFLOW_ID));
+            // TODO Create a compensation for Pay
 
-            try {
-                wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-                //TODO Provide compensation behavior, but for now, just error
-                throw new RuntimeException(e);
-            }
+            // Ship
+            wf.ship(String.format("Workflow ID [%s] is shipping", WORKFLOW_ID));
+            // TODO Create a compensation for Ship
 
             List<PurchaseItem> purchaseItems = wf.queryPurchaseItems();
             logger.info("The count of purchase items  is {}", purchaseItems.toArray().length);
 
+            // Empty out the cart
             wf.emptyCart(String.format("Workflow ID [%s] is emptying cart", WORKFLOW_ID));
+            // TODO Create a compensation for Empty Cart
 
             purchaseItems = wf.queryPurchaseItems();
 
             logger.info("The count of purchase items  after the cart is emptied is {}", purchaseItems.toArray().length);
 
         } catch (WorkflowException e) {
-            // Expected
+            // TODO Execute Saga.compensate() here
+            throw e;
         }
 
         System.exit(0);
