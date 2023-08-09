@@ -1,56 +1,62 @@
 package barryspeanuts.msg;
+
 public class CreditCard {
-    public CreditCard(String nameOnCard, String creditCardNumber, Integer expirationMonth, Integer expirationYear, Integer securityCode) {
-        this.nameOnCard = nameOnCard;
-        this.creditCardNumber = creditCardNumber;
-        this.expirationMonth = expirationMonth;
-        this.expirationYear = expirationYear;
-        this.securityCode = securityCode;
-    }
+  private String nameOnCard;
+  private String creditCardNumber;
+  private Integer expirationMonth;
+  private Integer expirationYear;
+  private Integer securityCode;
 
-    public String getNameOnCard() {
-        return nameOnCard;
-    }
+  public CreditCard(
+      String nameOnCard,
+      String creditCardNumber,
+      Integer expirationMonth,
+      Integer expirationYear,
+      Integer securityCode) {
+    this.nameOnCard = nameOnCard;
+    this.creditCardNumber = creditCardNumber;
+    this.expirationMonth = expirationMonth;
+    this.expirationYear = expirationYear;
+    this.securityCode = securityCode;
+  }
 
-    public void setNameOnCard(String nameOnCard) {
-        this.nameOnCard = nameOnCard;
-    }
+  public String getNameOnCard() {
+    return nameOnCard;
+  }
 
-    public String getCreditCardNumber() {
-        return creditCardNumber;
-    }
+  public void setNameOnCard(String nameOnCard) {
+    this.nameOnCard = nameOnCard;
+  }
 
-    public void setCreditCardNumber(String creditCardNumber) {
-        this.creditCardNumber = creditCardNumber;
-    }
+  public String getCreditCardNumber() {
+    return creditCardNumber;
+  }
 
-    public Integer getExpirationMonth() {
-        return expirationMonth;
-    }
+  public void setCreditCardNumber(String creditCardNumber) {
+    this.creditCardNumber = creditCardNumber;
+  }
 
-    public void setExpirationMonth(Integer expirationMonth) {
-        this.expirationMonth = expirationMonth;
-    }
+  public Integer getExpirationMonth() {
+    return expirationMonth;
+  }
 
-    public Integer getExpirationYear() {
-        return expirationYear;
-    }
+  public void setExpirationMonth(Integer expirationMonth) {
+    this.expirationMonth = expirationMonth;
+  }
 
-    public void setExpirationYear(Integer expirationYear) {
-        this.expirationYear = expirationYear;
-    }
+  public Integer getExpirationYear() {
+    return expirationYear;
+  }
 
-    public Integer getSecurityCode() {
-        return securityCode;
-    }
+  public void setExpirationYear(Integer expirationYear) {
+    this.expirationYear = expirationYear;
+  }
 
-    public void setSecurityCode(Integer securityCode) {
-        this.securityCode = securityCode;
-    }
+  public Integer getSecurityCode() {
+    return securityCode;
+  }
 
-    private String nameOnCard;
-    private String creditCardNumber;
-    private Integer expirationMonth;
-    private Integer expirationYear;
-    private Integer securityCode;
+  public void setSecurityCode(Integer securityCode) {
+    this.securityCode = securityCode;
+  }
 }

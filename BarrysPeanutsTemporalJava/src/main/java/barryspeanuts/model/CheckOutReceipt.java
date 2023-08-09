@@ -2,31 +2,31 @@ package barryspeanuts.model;
 
 import java.util.Date;
 import java.util.UUID;
-import java.util.Vector;
 
 public class CheckOutReceipt {
-    UUID id;
-    Date confirmationDate;
+  UUID id;
+  Date confirmationDate;
+  Purchase purchase;
 
-    public CheckOutReceipt(){};
+  ;
 
-    public CheckOutReceipt(Purchase purchase, Date confirmationDate) {
-        this.id = UUID.randomUUID();
-        this.confirmationDate = confirmationDate;
-        this.purchase = purchase;
-    }
+  public CheckOutReceipt() {}
 
-    public UUID getId() {
-        return id;
-    }
+  public CheckOutReceipt(Purchase purchase, Date confirmationDate) {
+    this.id = UUID.randomUUID();
+    this.confirmationDate = confirmationDate;
+    this.purchase = purchase;
+  }
 
-    public Date getConfirmationDate() {
-        return this.confirmationDate;
-    }
+  public UUID getId() {
+    return id;
+  }
 
-    public Purchase getPurchase() {
-        return this.purchase;
-    }
+  public Date getConfirmationDate() {
+    return this.confirmationDate;
+  }
 
-    Purchase purchase;
+  public Purchase getPurchase() {
+    return this.purchase;
+  }
 }

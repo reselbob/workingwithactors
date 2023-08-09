@@ -2,24 +2,25 @@ package barryspeanuts.model;
 
 import java.util.Date;
 import java.util.List;
+
 public class Purchase {
 
-    public Purchase(){}
-    public Purchase(List<PurchaseItem> purchaseItems, Date purchaseDate) {
-        this.purchaseItems = purchaseItems;
-        this.purchaseDate = purchaseDate;
-    }
+  String id;
+  List<PurchaseItem> purchaseItems;
+  Date purchaseDate;
 
-    public List<PurchaseItem> getPurchaseItems() {
-        return purchaseItems;
-    }
+  public Purchase() {}
 
+  public Purchase(List<PurchaseItem> purchaseItems, Date purchaseDate) {
+    this.purchaseItems = purchaseItems;
+    this.purchaseDate = purchaseDate;
+  }
 
-    public Date getPurchaseDate() {
-        return purchaseDate;
-    }
+  public List<PurchaseItem> getPurchaseItems() {
+    return purchaseItems;
+  }
 
-    String id;
-    List<PurchaseItem> purchaseItems;
-    Date purchaseDate;
+  public Date getPurchaseDate() {
+    return purchaseDate;
+  }
 }

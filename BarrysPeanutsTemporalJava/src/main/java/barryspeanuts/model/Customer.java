@@ -1,69 +1,70 @@
 package barryspeanuts.model;
+
 import java.util.UUID;
 
 public class Customer {
-    public UUID getId() {
-        if(this.id == null){
-            this.id = UUID.randomUUID();
-        }
-        return this.id;
-    }
+  UUID id;
+  String firstName;
+  String lastName;
+  String email;
+  String phone;
+  Address address;
 
-    public String getFirstName() {
-        return this.firstName;
-    }
+  public Customer() {}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public Customer(String firstName, String lastName, String email, String phone, Address address) {
+    this.id = UUID.randomUUID();
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.phone = phone;
+    this.address = address;
+  }
 
-    public String getLastName() {
-        return this.lastName;
+  public UUID getId() {
+    if (this.id == null) {
+      this.id = UUID.randomUUID();
     }
+    return this.id;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  public String getFirstName() {
+    return this.firstName;
+  }
 
-    public String getEmail() {
-        return this.email;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public String getLastName() {
+    return this.lastName;
+  }
 
-    public String getPhone() {
-        return this.phone;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+  public String getEmail() {
+    return this.email;
+  }
 
-    public Address getAddress() {
-        return this.address;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+  public String getPhone() {
+    return this.phone;
+  }
 
-    public Customer() {}
-    
-    public Customer(String firstName, String lastName, String email, String phone, Address address) {
-        this.id = UUID.randomUUID();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-    }
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
 
-    UUID id;
-    String firstName;
-    String lastName;
-    String email;
-    String phone;
-    Address address;
+  public Address getAddress() {
+    return this.address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
 }

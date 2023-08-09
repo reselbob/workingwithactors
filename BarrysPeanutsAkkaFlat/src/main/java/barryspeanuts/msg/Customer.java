@@ -3,66 +3,66 @@ package barryspeanuts.msg;
 import java.util.UUID;
 
 public class Customer {
-    public Customer(String firstName, String lastName, String email, String phone, Address address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-    }
+  private UUID id;
+  private String firstName;
+  private String lastName;
+  private String email;
+  private String phone;
+  private Address address;
 
-    public UUID getId() {
-        if (this.id == null) {
-            // Create a new UUID
-            this.id = UUID.randomUUID();
-        }
-        return this.id;
-    }
+  public Customer(String firstName, String lastName, String email, String phone, Address address) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.phone = phone;
+    this.address = address;
+  }
 
-    public String getFirstName() {
-        return firstName;
+  public UUID getId() {
+    if (this.id == null) {
+      // Create a new UUID
+      this.id = UUID.randomUUID();
     }
+    return this.id;
+  }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public String getPhone() {
-        return phone;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+  public String getPhone() {
+    return phone;
+  }
 
-    public Address getAddress() {
-        return address;
-    }
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+  public Address getAddress() {
+    return address;
+  }
 
-    private UUID id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private Address address;
+  public void setAddress(Address address) {
+    this.address = address;
+  }
 }

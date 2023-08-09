@@ -1,1 +1,32 @@
-{"Format":1,"ProjectReferences":[],"MetadataReferences":[],"Files":["/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Activities/CheckoutActivities.cs","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Models/Address.cs","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Models/CreditCard.cs","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Models/Customer.cs","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Models/Purchase.cs","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/MyWorkflow.workflow.cs","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Program.cs","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/readme.md","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/obj/Debug/TemporalioSamples.ActivitySimple.AssemblyInfo.cs","/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/obj/Debug/TemporalioSamples.ActivitySimple.AssemblyInfo.cs"],"BuildActions":["Compile","Compile","Compile","Compile","Compile","Compile","Compile","None","Compile","Compile"],"Analyzers":[],"AdditionalFiles":[],"EditorConfigFiles":[]}
+{
+  "Format": 1,
+  "ProjectReferences": [],
+  "MetadataReferences": [],
+  "Files": [
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Activities/CheckoutActivities.cs",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Models/Address.cs",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Models/CreditCard.cs",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Models/Customer.cs",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Models/Purchase.cs",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/MyWorkflow.workflow.cs",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/Program.cs",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/readme.md",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/obj/Debug/TemporalioSamples.ActivitySimple.AssemblyInfo.cs",
+    "/Users/reselbob/Projects/workingwithactors/Temporal/BarrysPeanutsDotNet/obj/Debug/TemporalioSamples.ActivitySimple.AssemblyInfo.cs"
+  ],
+  "BuildActions": [
+    "Compile",
+    "Compile",
+    "Compile",
+    "Compile",
+    "Compile",
+    "Compile",
+    "Compile",
+    "None",
+    "Compile",
+    "Compile"
+  ],
+  "Analyzers": [],
+  "AdditionalFiles": [],
+  "EditorConfigFiles": []
+}

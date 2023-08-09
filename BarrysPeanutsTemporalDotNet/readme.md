@@ -3,7 +3,7 @@
 
 ## (1) Download the Temporal CLI (which includes the server)
 
-If you do not have the Temporal server up and running already, run the following command: 
+If you do not have the Temporal server up and running already, run the following command:
 
 `curl -sSf https://temporal.download/cli.sh | sh`
 
@@ -11,7 +11,8 @@ If you do not have the Temporal server up and running already, run the following
 
 ## (2) Start the Temporal Server
 
-Here is the command for starting the Temporal Server on a local Ubuntu machine. Execute the command in a terminal window.
+Here is the command for starting the Temporal Server on a local Ubuntu machine. Execute the command in a terminal
+window.
 
 `temporal server start-dev --ip 0.0.0.0`
 
@@ -33,7 +34,7 @@ In a third terminal window, run the following command: `dotnet run worker`
 
 ## (5) Go the Web UI
 
- In a brower go to the address `http://localhost:8233/` to open the Temporal UI web page
+In a brower go to the address `http://localhost:8233/` to open the Temporal UI web page
 
 You'll output simiar to the following:
 

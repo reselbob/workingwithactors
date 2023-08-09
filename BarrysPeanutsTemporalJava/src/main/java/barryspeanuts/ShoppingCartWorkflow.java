@@ -1,40 +1,41 @@
 package barryspeanuts;
+
 import barryspeanuts.model.PurchaseItem;
 import io.temporal.workflow.QueryMethod;
 import io.temporal.workflow.SignalMethod;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
-
 import java.util.List;
-import java.util.Vector;
 
 @WorkflowInterface
 public interface ShoppingCartWorkflow {
-    @WorkflowMethod
-    void startWorkflow();
+  @WorkflowMethod
+  void startWorkflow();
 
-    @QueryMethod
-    ShoppingCartActivities queryActivities();
-    @QueryMethod
-    List<PurchaseItem> queryPurchaseItems();
+  @QueryMethod
+  ShoppingCartActivities queryActivities();
 
-    @SignalMethod
-    void addItem(PurchaseItem purchaseItem);
+  @QueryMethod
+  List<PurchaseItem> queryPurchaseItems();
 
-    @SignalMethod
-    void removeItem(PurchaseItem purchaseItem);
+  @SignalMethod
+  void addItem(PurchaseItem purchaseItem);
 
-    @SignalMethod
-    void clearItems();
+  @SignalMethod
+  void removeItem(PurchaseItem purchaseItem);
 
-    @SignalMethod
-    void checkOut(String message);
+  @SignalMethod
+  void clearItems();
 
-    @SignalMethod
-    void pay(String message);
+  @SignalMethod
+  void checkOut(String message);
 
-    @SignalMethod
-    void ship(String message);
-    @SignalMethod
-    void emptyCart(String message);
+  @SignalMethod
+  void pay(String message);
+
+  @SignalMethod
+  void ship(String message);
+
+  @SignalMethod
+  void emptyCart(String message);
 }

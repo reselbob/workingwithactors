@@ -9,15 +9,16 @@ the ShoppingCart fire off a message to the CheckOut actor. Once the checkout pro
 the Shopping cart then sends a message to the Payment actor to instigate payment behavior.
 After payment completes, the ShoppingCart sends a message to the Shipper actor to facilitate shipping. (See Figure 1.)
 
-|![Flat Style](./images/app-controller-akka.png)|
-| -------- |
-|Figure 1: The flat actor-controller implementation|
+| ![Flat Style](./images/app-controller-akka.png)    |
+|----------------------------------------------------|
+| Figure 1: The flat actor-controller implementation |
 
 One benefit of the flat style is the ease of implementation as well as ease of maintenance.
 
 # Running the code:
 
-The [Java Virtual Machine](https://openjdk.org/) and [Maven](https://maven.apache.org/install.html) need to be installed on the host computer.
+The [Java Virtual Machine](https://openjdk.org/) and [Maven](https://maven.apache.org/install.html) need to be installed
+on the host computer.
 
 ## (1) Confirm that Java and Maven are installed on the host machine
 
