@@ -1,5 +1,12 @@
 package barryspeanuts.msg;
+
 public class CreditCard {
+    private String nameOnCard;
+    private String creditCardNumber;
+    private Integer expirationMonth;
+    private Integer expirationYear;
+    private Integer securityCode;
+
     public CreditCard(String nameOnCard, String creditCardNumber, Integer expirationMonth, Integer expirationYear, Integer securityCode) {
         this.nameOnCard = nameOnCard;
         this.creditCardNumber = creditCardNumber;
@@ -47,10 +54,4 @@ public class CreditCard {
     public void setSecurityCode(Integer securityCode) {
         this.securityCode = securityCode;
     }
-
-    private String nameOnCard;
-    private String creditCardNumber;
-    private Integer expirationMonth;
-    private Integer expirationYear;
-    private Integer securityCode;
 }

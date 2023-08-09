@@ -1,9 +1,19 @@
 package barryspeanuts.msg;
 
-import java.util.UUID;
 import java.util.Date;
+import java.util.UUID;
 
 public class PurchaseItem {
+
+    private final UUID id;
+    private final Customer customer;
+    private final String description;
+    private final int packageSize;
+    private final int quantity;
+    private final double price;
+    private Address billingAddress;
+    private Address shippingAddress;
+    private Date shipDate;
 
     public PurchaseItem(Customer customer,
                         String description,
@@ -28,21 +38,17 @@ public class PurchaseItem {
         return this.id;
     }
 
-
     public Customer getCustomer() {
         return customer;
     }
-
 
     public int getPackageSize() {
         return packageSize;
     }
 
-
     public int getQuantity() {
         return quantity;
     }
-
 
     public double getPrice() {
         return price;
@@ -76,20 +82,8 @@ public class PurchaseItem {
         this.shipDate = shipDate;
     }
 
-
     public String getDescription() {
         return description;
     }
-
-
-    private final UUID id;
-    private final Customer customer;
-    private final String description;
-    private final int packageSize;
-    private final int quantity;
-    private final double price;
-    private Address billingAddress;
-    private Address shippingAddress;
-    private Date shipDate;
 }
 

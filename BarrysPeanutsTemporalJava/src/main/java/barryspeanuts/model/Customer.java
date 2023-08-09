@@ -1,9 +1,29 @@
 package barryspeanuts.model;
+
 import java.util.UUID;
 
 public class Customer {
+    UUID id;
+    String firstName;
+    String lastName;
+    String email;
+    String phone;
+    Address address;
+
+    public Customer() {
+    }
+
+    public Customer(String firstName, String lastName, String email, String phone, Address address) {
+        this.id = UUID.randomUUID();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public UUID getId() {
-        if(this.id == null){
+        if (this.id == null) {
             this.id = UUID.randomUUID();
         }
         return this.id;
@@ -48,22 +68,4 @@ public class Customer {
     public void setAddress(Address address) {
         this.address = address;
     }
-
-    public Customer() {}
-    
-    public Customer(String firstName, String lastName, String email, String phone, Address address) {
-        this.id = UUID.randomUUID();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-    }
-
-    UUID id;
-    String firstName;
-    String lastName;
-    String email;
-    String phone;
-    Address address;
 }

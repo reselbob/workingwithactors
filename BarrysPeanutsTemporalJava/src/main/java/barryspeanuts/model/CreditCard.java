@@ -7,7 +7,8 @@ public class CreditCard {
     int expirationYear;
     int securityCode;
 
-    public CreditCard(){}
+    public CreditCard() {
+    }
 
     public CreditCard(String fullName, String number, int expirationMonth, int expirationYear, int securityCode) {
         this.fullName = fullName;

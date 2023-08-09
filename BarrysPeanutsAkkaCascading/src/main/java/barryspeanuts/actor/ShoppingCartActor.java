@@ -7,21 +7,20 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
+import barryspeanuts.helper.MockHelper;
+import barryspeanuts.msg.CreditCard;
+import barryspeanuts.msg.Customer;
+import barryspeanuts.msg.PurchaseItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 
-import barryspeanuts.msg.CreditCard;
-import barryspeanuts.msg.Customer;
-import barryspeanuts.msg.PurchaseItem;
-import barryspeanuts.helper.MockHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 public class ShoppingCartActor extends AbstractBehavior<Object> {
     Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
+    ArrayList<PurchaseItem> purchaseItems;
 
     private ShoppingCartActor(ActorContext<Object> context) {
         super(context);
@@ -46,7 +45,6 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
                 .build();
     }
 
-
     private Behavior<Object> handleAddItem(AddItem msg) {
         this.purchaseItems.add(msg.purchaseItem);
         return this;
@@ -56,7 +54,6 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         this.purchaseItems.remove(msg.purchaseItem);
         return this;
     }
-
 
     private Behavior<Object> handleEmptyCart(EmptyCart msg) {
         logger.info("ShoppingCart is emptying the cart of {} items a checkout at {}. \n ", this.purchaseItems.toArray().length, new Date());
@@ -69,14 +66,15 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         ActorRef<Object> checkoutActor = ActorSystem.create(CheckOutActor.create(), "checkoutActor");
         Customer customer = this.purchaseItems.get(0).getCustomer();
         CreditCard creditCard = MockHelper.getCreditCard(customer.getFirstName(), customer.getLastName());
-        CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.purchaseItems,creditCard,customer);
+        CheckOutActor.StartCheckout startCheckout = new CheckOutActor.StartCheckout(this.purchaseItems, creditCard, customer);
 
         checkoutActor.tell(startCheckout);
         return this;
     }
 
-    ArrayList<PurchaseItem> purchaseItems;
     public static class AddItem {
+        PurchaseItem purchaseItem;
+
         public AddItem(PurchaseItem purchaseItem) {
             this.purchaseItem = purchaseItem;
         }
@@ -84,11 +82,11 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         public PurchaseItem getPurchaseItem() {
             return purchaseItem;
         }
-
-        PurchaseItem purchaseItem;
     }
 
     public static class RemoveItem {
+        PurchaseItem purchaseItem;
+
         public RemoveItem(PurchaseItem purchaseItem) {
             this.purchaseItem = purchaseItem;
         }
@@ -96,28 +94,30 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         public PurchaseItem getPurchaseItem() {
             return purchaseItem;
         }
-
-        PurchaseItem purchaseItem;
     }
 
     public static class EmptyCart {
+        Date emptyCartDate;
+
         public EmptyCart() {
             this.emptyCartDate = new Date();
         }
+
         public Date getEmptyCartDate() {
             return emptyCartDate;
         }
-        Date emptyCartDate;
     }
 
     public static class CheckoutCart {
+        Date checkoutCartDate;
+
         public CheckoutCart() {
             this.checkoutCartDate = new Date();
         }
+
         public Date getEmptyCartDate() {
             return checkoutCartDate;
         }
-        Date checkoutCartDate;
     }
-    
+
 }

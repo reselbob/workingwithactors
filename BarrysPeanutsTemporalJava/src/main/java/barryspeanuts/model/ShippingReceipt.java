@@ -5,6 +5,11 @@ import java.util.UUID;
 
 public class ShippingReceipt {
 
+    UUID id;
+    Date shipDate;
+    String shipper;
+
+
     public ShippingReceipt() {
     }
 
@@ -18,8 +23,6 @@ public class ShippingReceipt {
         return this.id;
     }
 
-
-
     public Date getShipDate() {
         return shipDate;
     }
@@ -27,8 +30,4 @@ public class ShippingReceipt {
     public String getShipper() {
         return shipper;
     }
-
-    UUID id;
-    Date shipDate;
-    String shipper;
 }

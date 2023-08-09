@@ -1,14 +1,15 @@
 package barryspeanuts.task;
 
-import barryspeanuts.ShoppingActivitiesImpl;
+import barryspeanuts.ShoppingCartActivitiesImpl;
 import barryspeanuts.ShoppingCartWorkflow;
 import barryspeanuts.model.PurchaseItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public class AddItemTaskImpl implements WorkflowTask {
 
-    private static final Logger logger = LoggerFactory.getLogger(ShoppingActivitiesImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShoppingCartActivitiesImpl.class);
 
     private final PurchaseItem purchaseItem;
 

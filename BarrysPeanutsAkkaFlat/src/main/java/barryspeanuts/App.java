@@ -1,8 +1,9 @@
 package barryspeanuts;
+
+import akka.actor.typed.ActorSystem;
 import barryspeanuts.actor.PaymentActor;
 import barryspeanuts.actor.ShipperActor;
 import barryspeanuts.actor.ShoppingCartActor;
-import akka.actor.typed.ActorSystem;
 import barryspeanuts.helper.MockHelper;
 import barryspeanuts.msg.Address;
 import barryspeanuts.msg.CreditCard;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeoutException;
 public class App {
     public static void main(String[] args) throws InterruptedException, TimeoutException {
         Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
-        logger.info("{} is starting Barry's Gourmet Peanuts",App.class);
+        logger.info("{} is starting Barry's Gourmet Peanuts", App.class);
 
         Customer customer = MockHelper.getCustomer();
         Address address = MockHelper.getAddress();

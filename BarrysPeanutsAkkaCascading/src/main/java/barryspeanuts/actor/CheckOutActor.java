@@ -49,10 +49,11 @@ public class CheckOutActor extends AbstractBehavior<Object> {
     }
 
 
-
-
-
     public static class StartCheckout {
+        ArrayList<PurchaseItem> purchaseItems;
+        CreditCard creditCard;
+        Customer customer;
+
         public StartCheckout(ArrayList<PurchaseItem> purchaseItems, CreditCard creditCard, Customer customer) {
             this.purchaseItems = purchaseItems;
             this.creditCard = creditCard;
@@ -70,16 +71,7 @@ public class CheckOutActor extends AbstractBehavior<Object> {
         public Customer getCustomer() {
             return customer;
         }
-
-        ArrayList<PurchaseItem> purchaseItems;
-
-        CreditCard creditCard;
-
-        Customer customer;
     }
-
-
-
 
 
 }

@@ -7,7 +7,6 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-
 import barryspeanuts.helper.MockHelper;
 import barryspeanuts.msg.ConfirmationMessage;
 import barryspeanuts.msg.CreditCard;
@@ -22,6 +21,7 @@ import java.util.Date;
 public class ShoppingCartActor extends AbstractBehavior<Object> {
 
     private static final Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
+    ArrayList<PurchaseItem> purchaseItems;
 
     private ShoppingCartActor(ActorContext<Object> context) {
         super(context);
@@ -64,7 +64,6 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         return this;
     }
 
-
     private Behavior<Object> handleEmptyCart(EmptyCart msg) throws InterruptedException {
         logger.info("ShoppingCart is emptying the cart of {} items a checkout at {}. \n ", this.purchaseItems.toArray().length, new Date());
         this.purchaseItems = new ArrayList<PurchaseItem>();
@@ -103,8 +102,9 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         return this;
     }
 
-    ArrayList<PurchaseItem> purchaseItems;
     public static class AddItem {
+        PurchaseItem purchaseItem;
+
         public AddItem(PurchaseItem purchaseItem) {
             this.purchaseItem = purchaseItem;
         }
@@ -112,11 +112,11 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         public PurchaseItem getPurchaseItem() {
             return purchaseItem;
         }
-
-        PurchaseItem purchaseItem;
     }
 
     public static class RemoveItem {
+        PurchaseItem purchaseItem;
+
         public RemoveItem(PurchaseItem purchaseItem) {
             this.purchaseItem = purchaseItem;
         }
@@ -124,28 +124,30 @@ public class ShoppingCartActor extends AbstractBehavior<Object> {
         public PurchaseItem getPurchaseItem() {
             return purchaseItem;
         }
-
-        PurchaseItem purchaseItem;
     }
 
     public static class EmptyCart {
+        Date emptyCartDate;
+
         public EmptyCart() {
             this.emptyCartDate = new Date();
         }
+
         public Date getEmptyCartDate() {
             return emptyCartDate;
         }
-        Date emptyCartDate;
     }
 
     public static class CheckoutCart {
+        Date checkoutCartDate;
+
         public CheckoutCart() {
             this.checkoutCartDate = new Date();
         }
+
         public Date getEmptyCartDate() {
             return checkoutCartDate;
         }
-        Date checkoutCartDate;
     }
-    
+
 }

@@ -2,13 +2,10 @@ package barryspeanuts;
 
 import barryspeanuts.mock.mockHelper;
 import barryspeanuts.model.PurchaseItem;
-
 import io.temporal.client.WorkflowOptions;
 import io.temporal.testing.TestWorkflowRule;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ShoppingCartWorkflowTest {
 
@@ -21,7 +18,7 @@ public class ShoppingCartWorkflowTest {
 
     @Test
     public void testIntegrationGetGreeting() {
-        testWorkflowRule.getWorker().registerActivitiesImplementations(new ShoppingActivitiesImpl());
+        testWorkflowRule.getWorker().registerActivitiesImplementations(new ShoppingCartActivitiesImpl());
         testWorkflowRule.getTestEnvironment().start();
 
         ShoppingCartWorkflow workflow =
@@ -30,7 +27,7 @@ public class ShoppingCartWorkflowTest {
                         .newWorkflowStub(
                                 ShoppingCartWorkflow.class,
                                 WorkflowOptions.newBuilder().setTaskQueue(testWorkflowRule.getTaskQueue()).build());
-                                workflow.startWorkflow();
+        workflow.startWorkflow();
         testWorkflowRule.getTestEnvironment().shutdown();
     }
 

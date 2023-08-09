@@ -1,6 +1,5 @@
 package barryspeanuts.task;
 
-import barryspeanuts.ShoppingActivitiesImpl;
 import barryspeanuts.ShoppingCartActivities;
 import barryspeanuts.ShoppingCartWorkflow;
 import barryspeanuts.ShoppingCartWorkflowImpl;
@@ -24,7 +23,7 @@ public class CheckOutTaskImpl implements WorkflowTask {
         ShoppingCartActivities activities = shoppingCartWorkflow.queryActivities();
         String fullName = String.format("%s %s", shoppingCartWorkflow.queryPurchaseItems().get(0).getCustomer().getFirstName(),
                 shoppingCartWorkflow.queryPurchaseItems().get(0).getCustomer().getLastName());
-        logger.info("{} is checking out customer {}", CheckOutTaskImpl.class,fullName);
+        logger.info("{} is checking out customer {}", CheckOutTaskImpl.class, fullName);
 
         // call the activity
         activities.checkOut(this.purchase.getPurchaseItems());

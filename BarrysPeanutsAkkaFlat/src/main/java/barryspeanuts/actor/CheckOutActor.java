@@ -40,6 +40,8 @@ public class CheckOutActor extends AbstractBehavior<Object> {
 
 
     public static class StartCheckout {
+        ArrayList<PurchaseItem> purchaseItems;
+
         public StartCheckout(ArrayList<PurchaseItem> purchaseItems) {
             this.purchaseItems = purchaseItems;
         }
@@ -48,11 +50,7 @@ public class CheckOutActor extends AbstractBehavior<Object> {
             return purchaseItems;
         }
 
-        ArrayList<PurchaseItem> purchaseItems;
-
     }
-
-
 
 
 }

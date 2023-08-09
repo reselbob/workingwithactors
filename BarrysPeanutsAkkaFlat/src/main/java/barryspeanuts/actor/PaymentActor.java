@@ -37,6 +37,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
                 .onMessage(PaymentInfo.class, this::handlePayment)
                 .build();
     }
+
     private Behavior<Object> handlePayment(PaymentInfo msg) {
         CreditCard creditCard = msg.getCreditCard();
 
@@ -53,6 +54,12 @@ public class PaymentActor extends AbstractBehavior<Object> {
 
     public static class PaymentInfo {
 
+        UUID id;
+        Customer customer;
+        Vector<PurchaseItem> purchaseItems;
+        CreditCard creditCard;
+        double paymentAmount;
+
         public PaymentInfo(Customer customer, CreditCard creditCard, double paymentAmount) {
             this.id = UUID.randomUUID();
             this.customer = customer;
@@ -63,6 +70,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
         public UUID getId() {
             return id;
         }
+
         public Customer getCustomer() {
             return customer;
         }
@@ -74,15 +82,15 @@ public class PaymentActor extends AbstractBehavior<Object> {
         public double getPaymentAmount() {
             return paymentAmount;
         }
+    }
 
+    public static class PaymentReceipt {
         UUID id;
         Customer customer;
+        Date paymentDate;
+        String creditCardNumber;
+        double amount;
 
-        Vector<PurchaseItem> purchaseItems;
-        CreditCard creditCard;
-        double paymentAmount;
-    }
-    public static class PaymentReceipt {
         PaymentReceipt(Customer customer, Date paymentDate, String creditCardNumber, double amount) {
             this.id = UUID.randomUUID();
             this.customer = customer;
@@ -110,12 +118,6 @@ public class PaymentActor extends AbstractBehavior<Object> {
         public double getPaymentAmount() {
             return amount;
         }
-
-        UUID id;
-        Customer customer;
-        Date paymentDate;
-        String creditCardNumber;
-        double amount;
     }
 
 }

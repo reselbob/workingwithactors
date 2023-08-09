@@ -3,6 +3,13 @@ package barryspeanuts.msg;
 import java.util.UUID;
 
 public class Customer {
+    private UUID id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
+    private Address address;
+
     public Customer(String firstName, String lastName, String email, String phone, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,11 +65,4 @@ public class Customer {
     public void setAddress(Address address) {
         this.address = address;
     }
-
-    private UUID id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private Address address;
 }

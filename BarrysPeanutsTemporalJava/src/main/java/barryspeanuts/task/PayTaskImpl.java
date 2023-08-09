@@ -1,6 +1,5 @@
 package barryspeanuts.task;
 
-import barryspeanuts.ShoppingActivitiesImpl;
 import barryspeanuts.ShoppingCartActivities;
 import barryspeanuts.ShoppingCartWorkflow;
 import barryspeanuts.ShoppingCartWorkflowImpl;
@@ -27,6 +26,6 @@ public class PayTaskImpl implements WorkflowTask {
                 this.purchase.getPurchaseItems().get(0).getCustomer().getLastName());
         logger.info("{}is Paying on CreditCard for {}", PayTaskImpl.class, creditCard.getFullName());
 
-        activities.pay(this.purchase,creditCard);
+        activities.pay(this.purchase, creditCard);
     }
 }

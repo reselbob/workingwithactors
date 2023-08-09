@@ -1,21 +1,24 @@
 package barryspeanuts;
 
 import barryspeanuts.model.Purchase;
-import barryspeanuts.task.*;
-import io.temporal.workflow.WorkflowQueue;
+import barryspeanuts.model.PurchaseItem;
+import barryspeanuts.task.CheckOutTaskImpl;
+import barryspeanuts.task.PayTaskImpl;
+import barryspeanuts.task.ShipTaskImpl;
+import barryspeanuts.task.WorkflowTask;
 import io.temporal.workflow.Workflow;
+import io.temporal.workflow.WorkflowQueue;
+import org.slf4j.Logger;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import barryspeanuts.model.PurchaseItem;
-import org.slf4j.Logger;
-
 public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
     private static final Logger logger = Workflow.getLogger(ShoppingCartWorkflowImpl.class);
-    ShoppingCartActivities activities = new ShoppingActivitiesImpl();
+    ShoppingCartActivities activities = new ShoppingCartActivitiesImpl();
+    List<PurchaseItem> purchaseItems;
     private WorkflowQueue<WorkflowTask> queue = Workflow.newWorkflowQueue(1024);
 
     @Override
@@ -91,7 +94,5 @@ public class ShoppingCartWorkflowImpl implements ShoppingCartWorkflow {
         return new Purchase(items, new Date());
 
     }
-
-    List<PurchaseItem> purchaseItems;
 
 }

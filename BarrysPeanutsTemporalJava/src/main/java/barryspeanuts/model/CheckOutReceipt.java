@@ -2,13 +2,16 @@ package barryspeanuts.model;
 
 import java.util.Date;
 import java.util.UUID;
-import java.util.Vector;
 
 public class CheckOutReceipt {
     UUID id;
     Date confirmationDate;
+    Purchase purchase;
 
-    public CheckOutReceipt(){};
+    ;
+
+    public CheckOutReceipt() {
+    }
 
     public CheckOutReceipt(Purchase purchase, Date confirmationDate) {
         this.id = UUID.randomUUID();
@@ -27,6 +30,4 @@ public class CheckOutReceipt {
     public Purchase getPurchase() {
         return this.purchase;
     }
-
-    Purchase purchase;
 }

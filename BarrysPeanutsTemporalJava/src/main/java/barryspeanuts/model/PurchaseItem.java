@@ -1,10 +1,10 @@
 package barryspeanuts.model;
-import java.util.UUID;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
-public class PurchaseItem
-{
+import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
+
+public class PurchaseItem {
     UUID id;
     Customer customer;
     String description;
@@ -14,11 +14,12 @@ public class PurchaseItem
     double total;
     Optional<Address> billingAddress;
     Optional<Address> shippingAddress;
-    LocalDateTime purchaseDate;
+    Date purchaseDate;
 
-    public PurchaseItem(){}
-    
-    public PurchaseItem(Customer customer, String description, int packageSize, double price, int quantity){
+    public PurchaseItem() {
+    }
+
+    public PurchaseItem(Customer customer, String description, int packageSize, double price, int quantity) {
         this.id = UUID.randomUUID();
         this.description = description;
         this.customer = customer;
@@ -59,24 +60,23 @@ public class PurchaseItem
         return billingAddress;
     }
 
-    public Optional<Address> getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public LocalDateTime getPurchaseDate() {
-        return purchaseDate;
-    }
-
-
     public void setBillingAddress(Optional<Address> billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public Optional<Address> getShippingAddress() {
+        return shippingAddress;
     }
 
     public void setShippingAddress(Optional<Address> shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
 
-    public void setPurchaseDate(LocalDateTime purchaseDate) {
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 }

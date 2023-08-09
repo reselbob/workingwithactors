@@ -45,13 +45,17 @@ public class ShipperActor extends AbstractBehavior<Object> {
                 msg.getShipper(),
                 shipDate);
         // Send a shipping receipt back toa the Customer
-        ShipperActor.ShippingReceipt shippingReceipt = new ShipperActor.ShippingReceipt(msg.getShipper(), msg.getPurchaseItems(),shipDate);
+        ShipperActor.ShippingReceipt shippingReceipt = new ShipperActor.ShippingReceipt(msg.getShipper(), msg.getPurchaseItems(), shipDate);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");
         customerActor.tell(shippingReceipt);
         return this;
     }
 
     public static class ShipmentInfo {
+
+        UUID id;
+        String shipper;
+        ArrayList<PurchaseItem> purchaseItems;
 
         public ShipmentInfo(String shipper, ArrayList<PurchaseItem> purchaseItems) {
             this.id = UUID.randomUUID();
@@ -70,15 +74,13 @@ public class ShipperActor extends AbstractBehavior<Object> {
         public ArrayList<PurchaseItem> getPurchaseItems() {
             return purchaseItems;
         }
-
-        UUID id;
-
-        String shipper;
-
-        ArrayList<PurchaseItem> purchaseItems;
     }
 
     public static class ShippingReceipt {
+
+        String shipper;
+        ArrayList<PurchaseItem> purchaseItems;
+        Date shipDate;
 
         public ShippingReceipt(String shipper, ArrayList<PurchaseItem> purchaseItems, Date shipDate) {
             this.shipper = shipper;
@@ -97,10 +99,6 @@ public class ShipperActor extends AbstractBehavior<Object> {
         public Date getShipDate() {
             return shipDate;
         }
-
-        String shipper;
-        ArrayList<PurchaseItem> purchaseItems;
-        Date shipDate;
     }
 
 }

@@ -1,7 +1,13 @@
 package barryspeanuts.msg;
 
-public class Address
-{
+public class Address {
+    private String address1;
+    private String address2;
+    private String city;
+    private String stateProvince;
+    private String zipRegionCode;
+    private String countryCode;
+
     public Address(String address1, String address2, String city, String stateProvince, String zipRegionCode, String countryCode) {
         this.address1 = address1;
         this.address2 = address2;
@@ -58,11 +64,4 @@ public class Address
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
-
-    private String address1;
-    private String address2;
-    private String city;
-    private String stateProvince;
-    private String zipRegionCode;
-    private String countryCode;
 }

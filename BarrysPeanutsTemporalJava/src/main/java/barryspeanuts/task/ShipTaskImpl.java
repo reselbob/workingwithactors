@@ -1,6 +1,5 @@
 package barryspeanuts.task;
 
-import barryspeanuts.ShoppingActivitiesImpl;
 import barryspeanuts.ShoppingCartActivities;
 import barryspeanuts.ShoppingCartWorkflow;
 import barryspeanuts.ShoppingCartWorkflowImpl;
@@ -22,7 +21,7 @@ public class ShipTaskImpl implements WorkflowTask {
     @Override
     public void process(ShoppingCartWorkflow shoppingCartWorkflow) {
         ShoppingCartActivities activities = shoppingCartWorkflow.queryActivities();
-        logger.info("{} is shipping to {}", ShipTaskImpl.class,this.shipper);
-        activities.ship(this.purchase,this.shipper);
+        logger.info("{} is shipping to {}", ShipTaskImpl.class, this.shipper);
+        activities.ship(this.purchase, this.shipper);
     }
 }

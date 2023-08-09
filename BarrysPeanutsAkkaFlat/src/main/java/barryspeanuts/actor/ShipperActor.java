@@ -50,6 +50,10 @@ public class ShipperActor extends AbstractBehavior<Object> {
 
     public static class ShipmentInfo {
 
+        UUID id;
+        String shipper;
+        ArrayList<PurchaseItem> purchaseItems;
+
         public ShipmentInfo(String shipper, ArrayList<PurchaseItem> purchaseItems) {
             this.id = UUID.randomUUID();
             this.shipper = shipper;
@@ -67,15 +71,13 @@ public class ShipperActor extends AbstractBehavior<Object> {
         public ArrayList<PurchaseItem> getPurchaseItems() {
             return purchaseItems;
         }
-
-        UUID id;
-
-        String shipper;
-
-        ArrayList<PurchaseItem> purchaseItems;
     }
 
     public static class ShippingReceipt {
+
+        String shipper;
+        Vector<PurchaseItem> purchaseItems;
+        Date shipDate;
 
         public ShippingReceipt(String shipper, Vector<PurchaseItem> purchaseItems, Date shipDate) {
             this.shipper = shipper;
@@ -94,10 +96,6 @@ public class ShipperActor extends AbstractBehavior<Object> {
         public Date getShipDate() {
             return shipDate;
         }
-
-        String shipper;
-        Vector<PurchaseItem> purchaseItems;
-        Date shipDate;
     }
 
 }

@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
-import java.util.Vector;
 
 public class PaymentActor extends AbstractBehavior<Object> {
     Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
@@ -39,11 +38,12 @@ public class PaymentActor extends AbstractBehavior<Object> {
                 .onMessage(PaymentInfo.class, this::handlePayment)
                 .build();
     }
+
     private Behavior<Object> handlePayment(PaymentInfo msg) {
         CreditCard creditCard = msg.getCreditCard();
 
         double amount = 0;
-        for(PurchaseItem item : msg.getPurchaseItems()){
+        for (PurchaseItem item : msg.getPurchaseItems()) {
             amount = amount + item.getTotal();
         }
         // Now pay
@@ -52,8 +52,8 @@ public class PaymentActor extends AbstractBehavior<Object> {
                 creditCard.getCreditCardNumber(),
                 new Date(),
                 amount);
-       // send a receipt to the Customer
-        PaymentActor.PaymentReceipt paymentReceipt = new PaymentActor.PaymentReceipt(msg.customer,new Date(), msg.creditCard.getCreditCardNumber(),amount);
+        // send a receipt to the Customer
+        PaymentActor.PaymentReceipt paymentReceipt = new PaymentActor.PaymentReceipt(msg.customer, new Date(), msg.creditCard.getCreditCardNumber(), amount);
         ActorSystem<Object> customerActor = ActorSystem.create(CustomerActor.create(), "customerActor");
         customerActor.tell(paymentReceipt);
         // and ship the purchase
@@ -66,6 +66,12 @@ public class PaymentActor extends AbstractBehavior<Object> {
 
     public static class PaymentInfo {
 
+        UUID id;
+        Customer customer;
+        ArrayList<PurchaseItem> purchaseItems;
+        CreditCard creditCard;
+        double paymentAmount;
+
         public PaymentInfo(Customer customer, CreditCard creditCard, ArrayList<PurchaseItem> purchaseItems) {
             this.id = UUID.randomUUID();
             this.customer = customer;
@@ -76,6 +82,7 @@ public class PaymentActor extends AbstractBehavior<Object> {
         public UUID getId() {
             return id;
         }
+
         public Customer getCustomer() {
             return customer;
         }
@@ -91,15 +98,15 @@ public class PaymentActor extends AbstractBehavior<Object> {
         public double getPaymentAmount() {
             return paymentAmount;
         }
+    }
 
+    public static class PaymentReceipt {
         UUID id;
         Customer customer;
+        Date paymentDate;
+        String creditCardNumber;
+        double amount;
 
-        ArrayList<PurchaseItem> purchaseItems;
-        CreditCard creditCard;
-        double paymentAmount;
-    }
-    public static class PaymentReceipt {
         PaymentReceipt(Customer customer, Date paymentDate, String creditCardNumber, double amount) {
             this.id = UUID.randomUUID();
             this.customer = customer;
@@ -127,12 +134,6 @@ public class PaymentActor extends AbstractBehavior<Object> {
         public double getAmount() {
             return amount;
         }
-
-        UUID id;
-        Customer customer;
-        Date paymentDate;
-        String creditCardNumber;
-        double amount;
     }
 
 }

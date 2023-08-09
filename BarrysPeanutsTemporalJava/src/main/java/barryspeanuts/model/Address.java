@@ -1,6 +1,25 @@
 package barryspeanuts.model;
 
 public class Address {
+    String address1;
+    String address2;
+    String city;
+    String stateProvince;
+    String zipRegionCode;
+    String country;
+
+    public Address() {
+    }
+
+    public Address(String address1, String address2, String city, String stateProvince, String zipRegionCode, String country) {
+        this.address1 = address1;
+        this.address2 = address2;
+        this.city = city;
+        this.stateProvince = stateProvince;
+        this.zipRegionCode = zipRegionCode;
+        this.country = country;
+    }
+
     public String getAddress1() {
         return address1;
     }
@@ -48,25 +67,5 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
-
-    public Address(){}
-
-    public Address(String address1, String address2, String city, String stateProvince, String zipRegionCode, String country) {
-        this.address1 = address1;
-        this.address2 = address2;
-        this.city = city;
-        this.stateProvince = stateProvince;
-        this.zipRegionCode = zipRegionCode;
-        this.country = country;
-    }
-
-
-
-    String address1;
-    String address2;
-    String city;
-    String stateProvince;
-    String zipRegionCode;
-    String country;
 
 }

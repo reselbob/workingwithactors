@@ -2,7 +2,9 @@ package barryspeanuts;
 
 import barryspeanuts.mock.mockHelper;
 import barryspeanuts.model.PurchaseItem;
-import io.temporal.client.*;
+import io.temporal.client.WorkflowClient;
+import io.temporal.client.WorkflowException;
+import io.temporal.client.WorkflowOptions;
 import io.temporal.common.RetryOptions;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.worker.Worker;
@@ -18,10 +20,9 @@ import java.util.UUID;
 public class BarrysPeanutsExecutor {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(BarrysPeanutsExecutor.class);
     static final String TASK_QUEUE = "BarryPeanutsJava";
     static final String WORKFLOW_ID = TASK_QUEUE + "-" + UUID.randomUUID();
-
+    private static final Logger logger = LoggerFactory.getLogger(BarrysPeanutsExecutor.class);
 
     @SuppressWarnings("CatchAndPrintStackTrace")
     public static void main(String[] args) {
@@ -42,12 +43,12 @@ public class BarrysPeanutsExecutor {
         worker.registerWorkflowImplementationTypes(ShoppingCartWorkflowImpl.class);
 
         // Activities are stateless and thread safe. So a shared instance is used.
-        ShoppingCartActivities shoppingCartActivities = new ShoppingActivitiesImpl();
+        ShoppingCartActivities shoppingCartActivities = new ShoppingCartActivitiesImpl();
         worker.registerActivitiesImplementations(shoppingCartActivities);
 
         // Start all workers created by this factory.
         factory.start();
-        logger.info("Worker started for task queue: {} with WorkflowID : {}",TASK_QUEUE, WORKFLOW_ID);
+        logger.info("Worker started for task queue: {} with WorkflowID : {}", TASK_QUEUE, WORKFLOW_ID);
 
         // now we can start running instances of our workflow - its state will be persisted
         WorkflowOptions options = WorkflowOptions.newBuilder()

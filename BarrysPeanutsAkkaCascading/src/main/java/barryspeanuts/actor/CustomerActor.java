@@ -1,4 +1,5 @@
 package barryspeanuts.actor;
+
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
@@ -13,6 +14,7 @@ import java.util.Date;
 
 public class CustomerActor extends AbstractBehavior<Object> {
     Logger logger = LoggerFactory.getLogger(ShoppingCartActor.class);
+
     private CustomerActor(ActorContext<Object> context) {
         super(context);
     }
@@ -51,7 +53,7 @@ public class CustomerActor extends AbstractBehavior<Object> {
         String lastName = null;
         String shipper = msg.getShipper();
         Date shipDate = new Date();
-        for(PurchaseItem item : items){
+        for (PurchaseItem item : items) {
             firstName = item.getCustomer().getFirstName();
             lastName = item.getCustomer().getLastName();
             item.setShipDate(shipDate);
@@ -65,12 +67,13 @@ public class CustomerActor extends AbstractBehavior<Object> {
     }
 
 
-
     public static class CreditCardRequest {
         ArrayList<PurchaseItem> purchaseItems;
+
         public CreditCardRequest(ArrayList<PurchaseItem> purchaseItems) {
             this.purchaseItems = purchaseItems;
         }
+
         public ArrayList<PurchaseItem> getPurchaseItems() {
             return this.purchaseItems;
         }
